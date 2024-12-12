@@ -1,0 +1,40 @@
+* The Little Prover
+- [GitHub](https://github.com/the-little-prover/j-bob)
+- [GitHub.io](https://the-little-prover.github.io/)
+** From GitHub
+```scheme
+;; Load the J-Bob language:
+(load "j-bob-lang.scm")
+;; Load J-Bob, our little proof assistant:
+(load "j-bob.scm")
+;; Load the transcript of all proofs in the book:
+(load "little-prover.scm")
+;; Run every proof in the book, up to and including the proof of align/align:
+(dethm.align/align)
+```
+
+Example of using J-Bob in ACL2, in the `acl2/` subdirectory:
+
+```lisp
+;; Load the J-Bob language:
+(include-book "j-bob-lang")
+;; Load J-Bob, our little proof assistant:
+(include-book "j-bob")
+;; Load the transcript of all proofs in the book:
+(include-book "little-prover")
+;; Run every proof in the book, up to and including the proof of align/align:
+(dethm.align/align)
+```
+
+Example of using J-Bob in Racket, using the Dracula package:
+
+```lisp
+;; Load the J-Bob language:
+(include-book "j-bob-lang" :dir :teachpacks)
+;; Load J-Bob, our little proof assistant:
+(include-book "j-bob" :dir :teachpacks)
+;; Load the transcript of all proofs in the book:
+(include-book "little-prover" :dir :teachpacks)
+;; Run every proof in the book, up to and including the proof of align/align:
+(dethm.align/align)
+```

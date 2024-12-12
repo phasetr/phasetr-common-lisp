@@ -1,0 +1,3 @@
+* Let Over Lambda
+- 翻訳購入済み
+- [GitHub](https://github.com/thephoeron/let-over-lambda){target=_blank}

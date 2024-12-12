@@ -1,0 +1,1541 @@
+* ToC
+- [URL](https://letoverlambda.com/index.cl/toc)
+* 1. Introduction
+- [URL](https://letoverlambda.com/index.cl/guest/chap1.html)
+** JP
+紹介
+マクロ
+Lispのコアは、プログラミング言語の空間で何らかのローカル最適を占めています。?ライスプの発明者ジョン・マッカーシーの控えめな言葉
+
+これは lisp でのマクロのプログラミングに関する本です。この本は、非常に重要な概要を説明するだけのほとんどのプログラミングブックとは異なり、洗練されたマクロをできるだけ効率的かつ迅速にプログラミングできるように設計された一連のチュートリアルと例です。マクロのマスタリングは、中間の lisp プログラマから lisp プロフェッショナルに卒業するための最後のステップです。
+
+マクロは、lispがプログラミング言語として持つ唯一の最大の利点であり、あらゆるプログラミング言語の唯一の最大の利点です。彼らを使えば、他の言語ではできないことを行うことができます。マクロは lisp を他のプログラミング言語に変換し、その後に戻るために使用できるため、経験を積むプログラマは、他のすべての言語が lisp の上にある単なるスキンであることを発見します。これは大きな問題です.Lisp は、そのプログラムを使用したプログラミングは、実際に高いレベルでプログラミングを行うため、特別なものです。ほとんどの言語が構文的および意味的な規則を発明し、実施する場合、lisp は一般的で可鍛性です。lispを使用すると、ルールを作成します。
+
+Lisp は、他のすべてのプログラミング言語よりも豊かで深い歴史を持っています。私たちの分野の短い存在を通して最高かつ最も明るいコンピュータ科学者のいくつかは、これまでで最も強力で一般的なプログラミング言語にするために非常に懸命に働いてきました。Lispは、簡潔な標準、複数の優れたオープンソース実装、および他のどのプログラミング言語よりも多くのマクロの利便性を享受しています。この本はCOMMON LISP[ANSI-CL][CLTL2]のみを使用していますが、アイデアの多くは、スキーム[R5RS]のような他のリスプに簡単に移植可能です。とはいえ、この本はマクロを書きたい場合は、COMMON LISPが使用するリスプであることを確信するでしょう。異なるタイプのlispは他の目的に優れていますが、COMMON LISPは当然マクロの専門家のための選択のツールです。
+
+COMMON LISPの設計者は、プログラミング言語の設計に関して、優れた仕事をしてきました。特に実装の品質を考慮した後、COMMON LISPは驚くほど少ない予約で、現在のプログラマーが利用できる最高のプログラミング環境です。プログラマとして、ほとんどの場合、COMMON LISPが本来の方法でそれを行うことを頼りにすることができます。デザイナーや実装者が正しい方法でそれをやったのは事実ですが、なぜそれが正しいのかを私たちに説明するのを忘れたと感じる人もいます。多くの部外者にとって、COMMON LISPは奇妙な機能の膨大なコレクションのように見えるので、オフにされ、マクロの真の力を決して経験しない、よりすぐに喜ぶ言語に移行します。それは、その主な目的ではありませんが、この本は、COMMON LISPである素晴らしい言語で最高の機能の多くのツアーとして使用することができます.ほとんどの言語は、実装しやすいように設計されています。COMMON LISPはプログラムに強力な設計されています。COMMON LISPのクリエイターが、この本を、言語の高度なマクロ機能の最も完全でアクセス可能な治療法の1つとして、またマクロであるトピックの海の楽しい落としとして、この本を高く評価することを心から願っています。
+
+マクロは、偶然ではなく、lisp自体とほぼ同じくらいの歴史を持ち、1963年にティモシー・ハート[MACRO-DEFINITIONS]によって発明されました。しかし、ほとんどの lisp プログラマは、マクロは可能な限り使用されず、他のすべてのプログラマがまったく使用しているわけではありません。これは常に高度なリスパーのための難問でした。マクロはとても素晴らしいので、なぜ誰もがいつもそれらを使用しないのか?確かに、最も賢く、最も決定的なプログラマは常にlispマクロに終わるが、そこでプログラミングのキャリアを始める人はほとんどいません。マクロが非常に優れている理由を理解するには、他の言語が持っていないlispが何であるかを理解する必要があります。他の、あまり強力でない言語の理解が必要です。悲しいことに、ほとんどのプログラマは、他のいくつかの言語を習得した後に学ぶ意志を失い、マクロが何であるか、またはマクロを利用する方法を理解することに決して近づけません。しかし、どの言語のプログラマーのトップパーセンタイルも、プログラムを書くプログラムを書く何らかの方法を常に学ばざるを得ません: マクロ。マクロを書くのに最適な言語なので、最も賢く、最も決定的で好奇心旺盛なプログラマーは、常にlispに終わる。
+
+プログラマの最上位は必ずしも少数ですが、プログラミング全体の人口が増加するにつれて、上位パーセンタイルのプログラマーの数も増えます。プログラミングの世界では、マクロの機能の例はほとんど見ておらず、理解する人は少なくなっていますが、これは変わりつつあります。マクロを通じて達成できる生産性の乗算により、世界が準備ができているかどうかにかかわらず、マクロの時代が来ています。この本は、避けられない未来のための基礎となる準備、すなわちマクロの世界を目指しています。準備してください。
+
+マクロを取り巻く従来の知恵は、マクロを理解するのが難しく、非常に微妙なバグを含み、すべてを関数と考える場合は驚くべき方法で制限できるため、必要なときにのみマクロを使用することです。これらは lisp マクロシステム自体の欠陥ではなく、マクロプログラミング全般の特性です。他のテクノロジと同様に、ツールの強力な機能が高いほど、そのツールを悪用する方法が増えます。そして、プログラミング構造を見る限り、lispマクロは最も強力なツールです。
+
+lisp でマクロを学習する興味深いのは、C プログラミング言語でポインタを学習する点です。ほとんどの初めのCプログラマは、ほとんどの言語を素早く拾うことができます。関数、型、変数、算術式:小学校の数学からより簡単なプログラミング言語の実験まで、初心者が経験していた以前の知的経験では、すべて並行しています。しかし、ほとんどの初心者のCプログラマは、ポインタに遭遇するとレンガの壁にぶつかります。
+
+ポインタは経験豊富なCプログラマにとって第二の性質であり、そのほとんどはCの適切な使用に必要な完全な理解を考慮しています。ポインタは非常に基本的なものなので、ほとんどの経験豊富なCプログラマは、文体や学習目的での使用に関する制限を助言しません。それにもかかわらず、多くのC初心者はポインタが不必要な合併症であると感じ、その使用を避け、貴重な言語機能が無視される言語症状でFORTRANを生じます。この病気は言語の特徴を知らず、プログラミングスタイルが悪いわけではない。機能が完全に理解されると、正しいスタイルが明らかになります。この本の補助テーマは、プログラミング言語に適用されるものであり、プログラミングではスタイルは直接追求するものではありません。スタイルは理解が欠けている場合にのみ必要です1 .
+
+Cポインタと同様に、マクロはしばしば十分に理解されていないlispの特徴であり、その適切な使用に関する知恵は非常に分散され、理想化されています。マクロを検討する際に、次のような文体的な格言に頼っている場合
+
+マクロは lisp コードの構文を変更します。
+
+マクロは、プログラムの解析ツリーで機能します。
+
+関数が実行しない場合にのみマクロを使用します。
+
+マクロプログラミングに関しては、おそらく全体像が欠けているでしょう。それがこの本が修正したいと考えているものです。
+
+マクロ構築に関する参考文献やチュートリアルはごくわずかです。ポール・グラハムのオン・リスプ[ON-LISP]は例外の一つです。On Lispのすべての単語は、マクロに興味がある人のために読む必要があります。Lispとグラハムの他の著作は、あなたが今読んでいる本の作成のための最も重要なインスピレーションでした。ポール・グラハムや他のlispライターのおかげで、マクロがプログラマーに与える力は広く議論されていますが、残念ながらまだ広く誤解されています。On Lispの単純な説得から得られるマクロプログラミングに関する知恵にもかかわらず、マクロと実際のプログラミングの問題との間に関係を作るプログラマはほとんどいません。On Lispではさまざまな種類のマクロが表示されますが、このマニュアルではマクロの使用方法を説明します。
+
+マクロの記述は、反射的で反復的なプロセスです。複雑なマクロはすべて、より単純なマクロから取得され、多くの場合、一連の改善テストサイクルを経て実行されます。さらに、マクロを適用する場所を認識することは、マクロを書くことから直接得られる習得したスキルです。プログラムを書くとき、あなたは意識的な人間として、あなたがそれに気づいているかどうかにかかわらず、システムとプロセスに従っています。すべてのプログラマは、プログラミング ツールの動作の概念モデルを持っており、コードの作成は、この直接的な論理的な結果として提供されます。インテリジェント・プログラマーがプログラミングの実行を論理的な手順と考え始めたら、このプロセスがオートメーション自体から恩恵を受けるという論理的な次のステップです。結局のところ、プログラマは、プロセスを自動化する、まさにこれを行う訓練を受けています。
+
+マクロを理解するための重要な最初のステップは、慎重な計画と多くの労力を必要とせず、プログラムの大部分が冗長パターンと柔軟性のない抽象化を持つことを認識することです。これは、ほとんどすべての大規模なソフトウェアプロジェクトで、複製されたコードとして、または適切な抽象化が著者に利用できなかったため、不必要に複雑なコードとして見ることができます。マクロを効果的に使用するには、これらのパターンと抽象化を認識し、コードを記述するためのコードを作成する必要があります。マクロの記述方法を理解するだけでは不十分です。プロの lisp プログラマは、マクロを記述する理由を知る必要があります。
+
+lisp を初めて使用する C プログラマは、マクロの主な目的が実行時のコードの効率を向上させると仮定する間違いをしばしば2 .マクロは、多くの場合、このタスクに非常に便利ですが、マクロの最も一般的な使用法は、目的のアプリケーションをプログラミングする作業を容易にすることです。ほとんどのプログラムのパターンの大部分は冗長コピーされ、抽象化の一般性が完全には利用されないため、適切に設計されたマクロは文字通り新しい表現面でのプログラミングを可能にします。他の言語が厳格で特定の場合、lispは流動的で一般的です。
+
+この本はlispの紹介ではありません。トピックと資料は、マクロが提供しなければならないものについて興味を持っている非lisp言語のプロのプログラマーと、lispが何を特別なものにするのかを本当に学ぶ準備ができている中間のlispの学生を対象としています。lisp プログラミングの基本的な知識から中級知識が前提とされていますが、クロージャやマクロの深い理解は想定されていません。
+
+この本は理論に関するものではありません。すべての例は、現在、あなたのプログラミングを向上させるために役立つ作業、使用できるコードを含みます。この本は、高度なプログラミング手法を使用して、より良いプログラミングを支援することについて説明します。アクセシビリティを向上させるために意図的に単純なプログラミングスタイルを使用する他の多くのプログラミング本とは対照的に、この本はプログラミングを教えるための最良のアプローチは言語を完全に利用することであるという見解を取ります。提供されているコード サンプルの多くは COMMON LISPの難解な機能を使用していますが、そのような潜在的に不慣れな機能が使用されているように記述されています。キャリブレーションのため、読んで理解した場合3 第2章の『クロージャと第3章、マクロの基礎』のすべては、本書の目的のために、lisp理解の中間段階を過ぎたことを考えることができる。
+
+lispの一部は自分自身で物事を発見するものであり、この本はあなたを奪うものではありません。この本は、あなたが慣れているよりも速く、ほとんどの本よりも速く動くことを注意してください。本書のコードの一部を理解するには、追加の COMMON LISPのチュートリアルまたはリファレンスを参照する必要があります。基本を説明した後、最先端のマクロ研究の一部を直接説明し、その多くは未踏の灰色領域の知的地形と国境を接します。高度なマクロ プログラミングと同様に、このマニュアルではマクロの組み合わせに重点を置いています。このトピックは恐ろしい評判を持っており、プログラマが少数のプログラマにもよく理解されています。マクロの組み合わせは、今日のプログラミング言語における研究の最も広大で肥沃な領域を表しています。アカデミアは、タイプ、オブジェクト、プロローグスタイルのロジックから興味深い結果のほとんどを絞り出しましたが、マクロプログラミングは巨大でぽっかりとブラックホールのままです。その先に何があるのか誰も本当に知らない。私たちが知っているのは、はい、それは複雑で恐ろしく、現在は可能性の無限に見えるということです。あまりにも多くの他のプログラミングのアイデアとは異なり、マクロは役に立たない理論的出版物をかき集めるための学術的概念でも、空のエンタープライズソフトウェアの流行語でもありません。マクロはハッカーの親友です。マクロを使用すると、よりスマートにプログラムを作成できます。マクロを理解するようになったプログラマの多くは、マクロを使わずにプログラムを行いたくないと決めます。
+
+ほとんどのlispの本はlispをより人気のあるものにするために書かれていますが、私はlispの日々の公共の魅力に全く関心を持ち込みしません。リスプは消えない私は私のプログラミングのキャリアの残りの部分のための秘密兵器としてlispを使用し続けることができれば、私は完全に幸せです。この本が唯一の目的を持っている場合、それは私がOn Lispで彼らに触発されたのと同じように、マクロの研究と研究を刺激することです。この本の読者も、いつかもっと良いlispマクロツールとさらに興味深いlispマクロブックを楽しむかもしれないので、インスピレーションを受けたかもしれません。
+
+まだリスプの力に畏敬の念を持って、
+
+あなたの謙虚な著者、
+
+ダグ・ホイト
+
+U言語
+マクロについて議論することは議論そのものを含むので、この本に採用している慣習について明確にする必要があります。私が今書いているのは、あなたが読んで解釈しているものによってあなたに伝えられているように、それ自体が形式化と分析に値する表現のシステムです。
+
+誰もハスケルカリー、数学論理の基礎の著者よりもこれをよく理解していない[FOUNDATIONS].カリーは、アイデアを形式化しようとしただけでなく、アイデアの表現そのものも試みていたので、作家と読者の間のコミュニケーション言語の概念を抽象化する必要があることがわかりました。彼はそれをU言語と呼んだ。
+
+現在を含むすべての調査は、言語によってある人から別の人に伝えられないもの。この明白な事実に注意を喚起し、使用されている言語に名前を付け、その特徴のいくつかを明確にすることで、私たちの研究を始める方が便利です。私たちは、使用されている言語をU言語と呼びます。[...]言語が他のほとんどの人よりも私たちの仕事に密接に関連しているという事実がなければ、それに注意を喚起しても意味がありません。
+
+この本では、この特別なフォントに重点を置く必要がある重要な新しい概念やポイントを紹介します。プログラムで見つかった特別なフォーム、関数、マクロ、その他の識別子を参照する場合、この特殊なフォントを使用します(COMMON LISPマクロとラムダの概念など、いくつかの単語に複数の意味があることに注意してください。特別なフォームとletフォームであるリストを許可する)。
+
+プログラム・リスト例
+(defun example-program-listing ()
+  '(this is
+     (a (program
+          (listing)))))
+本書では、新しいコードがプログラムの一覧の形で紹介されています。再利用のために設計されたコード、または適切な実装の例を示すコードは、関数例プログラム・リストの定義のように示されています。しかし、時にはコードのビットの使用を実証したい、または単に書かれたテキストの流れを逸らせずにいくつかの式のプロパティを議論したい4 .このような場合、コードまたはコードの使用例は次のようになります。
+
+(this is
+  (demonstration code))
+プログラミングを教える多くの書き込みは、ポイントを説明するために孤立した工夫された例を多用しますが、現実と結び付けることを忘れています。本書の例は、現在説明されている全体像のプログラミングのアイデアを説明するために、可能な限り最小限で直接的に行うことを試みます。いくつかの書き込みは、その例でかわいい、風変わりな識別子の名前や肌深い類推を使用して退屈であることを隠そうとします。この例はアイデアを説明するためだけに役立ちます。しかし、とりわけこの本は自分自身(または何か)をあまり真剣に受け止めないようにしています。ここにユーモアがあり、違いはあなたがそれを探す必要があることです。
+
+lisp のインタラクティブな性質により、単純な表現を評価した結果は、多くの場合、同等の量の U 言語以上のものを伝えることができます。このような場合、これは、COMMON LISP読み取り評価印刷ループ(REPLと呼ばれる) からの出力を表示する方法です。
+
+```
+(this is
+  (the expression
+    (to evaluate)))
+```
+
+THIS-IS-THE-RESULT
+
+入力したテキストが小文字で表示されますが、lisp から返されるテキストは大文字になります。これは、REPLプリントアウトを簡単にスキャンし、どの式を入力したのとどの式がlispで出力されたかを知ることができるCOMMON LISPの機能です。より正確に言うと、この機能を使用すると、シンボルを含む任意の lisp フォーム (任意のファイルまたは画面) をすばやくスキャンし、lisp リーダーによって処理されたかどうかをすぐに確認できます。アスタリスク文字 (*) がプロンプトを表していることにも注意してください。この文字は、バランスの取れた文字と混同できないので、また、REPLセッションをスキャンするときに明確に目立つピクセル数が多いため、理想的です。
+
+複雑な lisp マクロを記述することは、反復的なプロセスです。誰も座って、他の言語のプログラムに共通するキャバリアスタイルでページの長いマクロを打ち出します。これは、lisp コードに他のほとんどの言語よりもはるかに多くの情報が含まれているため、また、lisp の手法により、プログラマがプログラムを拡張する必要があるためです。
+
+この本は、COMMON LISPやスキームのようなlispの種類と、建築材料のより抽象的な概念を区別しています。もう 1 つの重要な違いは、lisp プログラミング言語と非 lisp プログラミング言語の間で行われます。時には、非lisp言語について話す必要があり、できるだけ少ない敵を作るために、特に言語を選ぶことを避けたい。そのためには、次のような異例の定義に従います。
+
+lisp マクロのない言語はBlubです。
+
+U言語の単語Blubは、ポール・グラハムのエッセイから来ています,平均を打ち負かす[BEATING-AVGS], Blubは、lispが他の言語とは異なるという事実を強調するために使用される架空の言語です: lispは異なります.Blubは、インフィックス構文、迷惑なタイプシステム、不自由なオブジェクトシステムによって特徴付けられますが、その唯一の統一特性はlispマクロの欠如です。Blubの用語は、高度なマクロ手法を理解する最も簡単な方法は、なぜBlubでテクニックが不可能なのかを考えるため、私たちにとって便利です。Blubの用語の目的は、非lisp言語5で楽しみを突くものではありません.
+
+反復プロセスの例
+(defun example-function% () ; first try
+  t)
+
+(defun example-function%% () ; second try
+  t)
+
+(defun example-function () ; got it!
+  t)
+マクロ作成の反復処理を説明するために、このマニュアルでは、定義が不完全であるか、または他の方法でまだ改善されていない関数やマクロの名前にパーセント (%)複数のリビジョンでは、名前の末尾に複数の % 文字が表示され、最終的なバージョンに % 文字が含まれる場合があります。
+
+マクロは、カリーの用語でメタプログラミングとして説明されています。メタプログラムとは、プログラマがプログラムを書きやすくすることを唯一の目的としたプログラムです。メタプログラミングは、すべてのプログラミング言語において様々な範囲で採用されていますが、どの言語もlispほど完全に採用していません。他の言語では、プログラマは便利なメタプログラミング技術にコードを書く必要はありません。lispプログラムが非lispプログラマに奇妙に見える理由は、lispコードがどのように表現されているかは、メタプログラミングのニーズの直接的な結果です。本書が説明する中で、lisp のこの設計上の決定 (lisp 自体でメタ・プログラムを記述する) は、それが実現する驚くべき生産性上の利点を与えるものです。ただし、lisp でメタプログラムを作成するため、メタプログラミングは U 言語仕様とは異なるので注意する必要があります。メタ言語は、他のメタ言語を含む異なる視点から議論できますが、U言語は1つしかありません。カレーは、彼のシステムのためにこれを明らかにします:
+
+私たちは、レベルの任意の数の言語の階層を形成し続けることができます。ただし、レベルがいくつあるとしても、U言語は最高レベルになります: 2つのレベルがある場合、それはメタ言語になります。3 つのレベルがある場合、それはメタメタ言語になります。などなど。したがって、言語とメタ言語という用語は明確に保たなければなりません。
+
+これはもちろんlispに関する本であり、lispのロジックシステムはカリーが述べたものとは大きく異なっているので、彼の作品から他の慣習はほとんどありません。しかし、カリーの論理とメタプログラミングへの貢献は、この日まで私たちを鼓舞し続けています。象徴的な引用に関する彼の深い洞察力だけでなく、彼の美しく言い換え、実行されたU言語のため。
+
+リスプユーティリティ
+Lispは、あなたが理解しているか、理解していないそれらの本の一つです。あなたはそれを崇拝するか、それを恐れるかのどちらかです。そのタイトルから始めて、On Lispはlispの上に層であるプログラミング抽象化を作成することです。これらの抽象化を作成した後、我々は、以前の抽象化上の連続した層であるより多くのプログラミング抽象化を作成する自由です。
+
+使用する価値のあるほとんどすべての言語では、言語の機能の大部分は言語自体で実装されています。Blub言語は通常、Blubで書かれた広範な標準ライブラリを持っています。実装者でさえ、ターゲット言語でプログラミングしたくない場合は、おそらくどちらかを望まないでしょう。
+
+しかし、他の言語の標準ライブラリを検討した後でさえ、lispは異なります。他の言語がプリミティブで構成されるという意味では、lispはメタプリミティブで構成されています。マクロが標準化されると、COMMON LISPのように、言語の残りの部分は、本質的に何もないからブートストラップすることができます。ほとんどの言語は、これらのプリミティブの柔軟性のあるセットを与えようとしますが、lispはあらゆる種類のプリミティブを可能にするメタプログラミングシステムを提供します。もう一つの考え方は、lispがプリミティブの概念を完全に廃止することです。lispでは、メタプログラミングシステムはいわゆるプリミティブで停止しません。実際には、ユーザー アプリケーションに継続する言語を構築するために使用されるマクロ プログラミング手法が必要になります。最高レベルのユーザーによって書かれたアプリケーションでさえ、lispタマネギのマクロ層であり、繰り返しを経て成長しています。
+
+この光の中で、言語にプリミティブがまったくあることは問題です。プリミティブがあるときはいつでも、システムの設計に障壁、非直交性があります。時には、もちろん、これは保証されています。ほとんどのプログラマは、個々のマシンコード命令を、Cまたはlispコンパイラが処理するプリミティブとして扱う問題はありません。しかし、lispユーザーは他のほとんどすべてを制御する必要があります。プログラマに与えられたコントロールに関しては、lisp のように完全な言語は他にありません。
+
+On Lispのアドバイスに従って、あなたが現在読んでいる本自体がタマネギの別の層として設計されました。プログラムが他のプログラムに重なっているのと同じ意味で、この本はOn Lispに重ねられます。それはグラハムの本の中心的なテーマです:よく設計されたユーティリティは、組み合わせると、部品の生産性の利点の合計よりも大きなを与えるために一緒に働くことができます。このセクションでは、On Lispおよびその他の場所から提供される便利なユーティリティのコレクションについて説明します。
+
+MKSTR-SYMB
+(defun mkstr (&rest args)
+  (with-output-to-string (s)
+    (dolist (a args) (princ a s))))
+
+(defun symb (&rest args)
+  (values (intern (apply #'mkstr args))))
+シンブは、mkstrの上に重なって、シンボルを作成する一般的な方法です。シンボルは任意の文字列で参照でき、プログラムでシンボルを作成することは非常に便利なので、symbはマクロプログラミングに不可欠なユーティリティであり、本書全体で頻繁に使用されています。
+
+群
+(defun group (source n)
+  (if (zerop n) (error "zero length"))
+  (labels ((rec (source acc)
+             (let ((rest (nthcdr n source)))
+               (if (consp rest)
+                   (rec rest (cons
+                               (subseq source 0 n)
+                               acc))
+                   (nreverse
+                     (cons source acc))))))
+    (if source (rec source nil) nil)))
+グループは、マクロを書くときに一貫してポップアップするもう 1 つのユーティリティです。その一部は、既に引数をグループ化している COMMON LISPのsetfやpsetfのような演算子をミラー化する必要があるためです。この機能は頻繁に使用されるため、抽象化をできるだけ一般的に行うことが理にかなっています。Graham のグループは、パラメータnで指定された、指定されたグループ化量でグループ化されます。setfのような場合、引数はペアにグループ化され、nは 2 です。
+
+押し潰す
+(defun flatten (x)
+  (labels ((rec (x acc)
+             (cond ((null x) acc)
+                   ((atom x) (cons x acc))
+                   (t (rec
+                        (car x)
+                        (rec (cdr x) acc))))))
+    (rec x nil)))
+平坦化は、On Lispで最も重要なユーティリティの 1 つです。任意にネストされたリスト構造を指定すると、flattenはそのリスト構造を通じて到達可能なすべての原子を含む新しいリストを返します。リスト構造をツリーと考えると、flattenはツリー内のすべての葉のリストを返します。そのツリーが lisp コードを表す場合、式内の特定のオブジェクトの存在をチェックすることで、flattenはコードウォークを実行します。
+
+事実と選択
+(defun fact (x)
+  (if (= x 0)
+    1
+    (* x (fact (- x 1)))))
+
+(defun choose (n r)
+  (/ (fact n)
+     (fact (- n r))
+     (fact r)))
+事実と選択は、階乗係数関数と二項係数関数の明白な実装です。
+
+ライセンス
+私は、この本で提示されたコードの背後にある概念は、物理的な観察や数学的証拠と同じくらい基本的であると信じているので、たとえ私が彼らの所有権を主張できるとは思わない。そのため、この本のコードで好きなことを自由に行うことができます。コードと共に配布される非常に自由なライセンスは次のとおりです。
+
+;; This is the source code for the book
+;; _Let_Over_Lambda_ by Doug Hoyte.
+;; This code is (C) 2002-2008, Doug Hoyte.
+;;
+;; You are free to use, modify, and re-distribute
+;; this code however you want, except that any
+;; modifications must be clearly indicated before
+;; re-distribution. There is no warranty,
+;; expressed nor implied.
+;;
+;; Attribution of this code to me, Doug Hoyte, is
+;; appreciated but not necessary. If you find the
+;; code useful, or would like documentation,
+;; please consider buying the book!
+この本のテキストは(C)2008ダグホイトです。すべての権利が予約されています。
+
+感謝
+ブライアン・ホイト、ナンシー・ホームズ、ロザリー・ホームズ、イアン、アレックス、私の家族のすべて。サイク、狂気、フョードル、cyb0rg/asm、クローン、ブラックハート、d00tz、rt、マグマ、ヌミッシュ、ジバゴ、霜取り;マイク・コンロイ、シルビア・ラッセル、アラン・パエス、ロブ・マッカーサー、シルビー・デジャルダンズ、ジョン・マッカーシー、ポール・グラハム、ドナルド・クヌース、レオ・ブロディ、ブルース・シュナイアー、リチャード・ストールマン、エイディ・ワイツ、ピーター・ノルヴィグ、ピーター・ザイベル、クリスチャン・クィインネック、キース・ボスティック、ジョン・ギャンブル;COMMON LISPのデザイナーとクリエイター、 特にガイ スティール、 リチャード ガブリエル、 ケント ピットマン、 CMUCL/SBCL、CLISP、OpenBSD、GNU/Linux の開発者とメンテナンス者。
+
+表紙のデザインのためのイアン・ホイトとバックカバー漫画のためのレオ・ブロディに感謝します。
+
+この本は、プログラミングを愛するすべての人に捧げられています。
+** EN
+Macros
+Lisp's core occupies some kind of local optimum in the space of programming languages.
+Modest words from John McCarthy, inventor of lisp
+
+This is a book about programming macros in lisp. Unlike most programming books that only give them a cursory overview, this book is a series of tutorials and examples designed to get you programming sophisticated macros as efficiently and quickly as possible. Mastering macros is the final step to graduating from an intermediate lisp programmer to a lisp professional.
+
+Macros are the single greatest advantage that lisp has as a programming language and the single greatest advantage of any programming language. With them you can do things that you simply cannot do in other languages. Because macros can be used to transform lisp into other programming languages and back, programmers who gain experience with them discover that all other languages are just skins on top of lisp. This is the big deal. Lisp is special because programming with it is actually programing at a higher level. Where most languages invent and enforce syntactic and semantic rules, lisp is general and malleable. With lisp, you make the rules.
+
+Lisp has a richer, deeper history than all other programming languages. Some of the best and brightest computer scientists throughout our field's brief existence have worked very hard to make it the most powerful and general programming language ever. Lisp also enjoys a number of concise standards, multiple excellent open-source implementations, and more macro conveniences than any other programming language. This book uses only COMMON LISP[ANSI-CL][CLTL2] but many of the ideas are trivially portable to other lisps like Scheme[R5RS]. That said, hopefully this book will convince you that if you want to write macros, COMMON LISP is the lisp to use. While different types of lisp are excellent for other purposes, COMMON LISP is deservedly the tool of choice for the macro professional.
+
+The designers of COMMON LISP have done an excellent job in designing a programming language right. Especially after considering implementation quality, COMMON LISP is, with surprisingly few reservations, by far the best programming environment available to current-day programmers. As a programmer you can almost always count on COMMON LISP to have done it the way it ought be done. While it's true the designers and implementors have done it the right way, some feel that they forgot to describe to us just why it's right. To many outsiders COMMON LISP just looks like an enormous collection of strange features, and so are turned off, moving to a more immediately gratifying language?doomed to never experience the true power of macros. Although it is not its primary purpose, this book can be used as a tour of many of the best features in the amazing language that is COMMON LISP. Most languages are designed to be easy to implement; COMMON LISP is designed to be powerful to program. I sincerely hope the creators of COMMON LISP appreciate this book as one of the most complete and accessible treatments of the language's advanced macro features, and also as an enjoyable drop in the ocean of topics that is the macro.
+
+Macros have, not by accident, almost as much history as lisp itself, being invented in 1963 by Timothy Hart[MACRO-DEFINITIONS]. However, macros are still not used to the fullest possible extent by most lisp programmers and are not used at all by all other programmers. This has always been a conundrum for advanced lispers. Since macros are so great, why doesn't everybody use them all the time? While it's true that the smartest, most determined programmers always end up at lisp macros, few start their programming careers there. Understanding why macros are so great requires understanding what lisp has that other languages don't. It requires an understanding of other, less powerful languages. Sadly, most programmers lose the will to learn after they have mastered a few other languages and never make it close to understanding what a macro is or how to take advantage of one. But the top percentile of programmers in any language are always forced to learn some sort of way to write programs that write programs: macros. Because it is the best language for writing macros, the smartest and most determined and most curious programmers always end up at lisp.
+
+Although the top-percentile of programmers is necessarily a small number, as the overall programming population grows so does the number of top-percentile programmers. The programming world sees few examples of the power of macros and understands far fewer, but this is changing. Because of the productivity multiplication that can be achieved through macros, the age of the macro is coming, whether the world is ready or not. This book aims to be a base-line preparation for the inevitable future: a world of macros. Be prepared.
+
+The conventional wisdom surrounding macros is to use them only when necessary because they can be difficult to understand, contain extremely subtle bugs, and limit you in possibly surprising ways if you think of everything as functions. These aren't defects in the lisp macro system itself but instead are traits of macro programming in general. As with any technology, the more powerful the tool, the more ways there are to misuse it. And, as far as programming constructs go, lisp macros are the most powerful tool.
+
+An interesting parallel to learning macros in lisp is that of learning pointers in the C programming language. Most beginning C programmers are able to quickly pick up most of the language. Functions, types, variables, arithmetic expressions: all have parallels in previous intellectual experiences beginners might have had, from elementary school maths to experimenting with simpler programming languages. But most novice C programmers hit a brick wall when they encounter pointers.
+
+Pointers are second nature to experienced C programmers, most of whom consider their complete understanding necessary for the proper use of C. Because pointers are so fundamental, most experienced C programmers would not advise limits on their use for stylistic or learning purposes. Despite this, many C novices feel pointers are an unnecessary complication and avoid their use, resulting in the FORTRAN in any language symptom where valuable language features are neglected. The disease is ignorance of the language's features, not poor programming style. Once the features are fully understood, the correct styles are obvious. An auxiliary theme of this book, one that applies to any programming language, is that in programming, style is not something to pursue directly. Style is necessary only where understanding is missing1.
+
+Like C pointers, the macro is a feature of lisp that is often poorly understood, the wisdom on its proper use being very distributed and idealised. If when considering macros you find yourself relying on stylistic aphorisms like
+
+Macros change the syntax of lisp code.
+
+Macros work on the parse tree of your program.
+
+Only use macros when a function won't do.
+
+you are probably missing the big picture when it comes to macro programming. That is what this book hopes to fix.
+
+There are very few good references or tutorials on macro construction. Paul Graham's On Lisp[ON-LISP] is one of the exceptions. Every word of On Lisp is required reading for anyone interested in macros. On Lisp and Graham's other writings were the most important inspirations for the creation of the book you are reading now. Thanks to Paul Graham and other lisp writers, the power that macros provide programmers is widely discussed, yet is unfortunately still widely misunderstood. Despite the wisdom regarding macro programming that can be gleaned from a simple perusal of On Lisp, few programmers make the connection between the macro and their real-life programming problems. While On Lisp will show you the different types of macros, this book will show you how to use them.
+
+Macro writing is a reflective and iterative process. All complex macros come from simpler macros, often through a long series of improvement-test cycles. What's more, recognising where to apply macros is an acquired skill that comes directly from writing them. When you write a program, you, as a conscious human, are following a system and a process whether you are aware of it or not. Every programmer has a conceptual model of how programming tools work and the creation of code comes as a direct, logical result of this. Once an intelligent programmer begins to think of the act of programming as a logical procedure, the logical next step is for this process to benefit from automation itself. After all, programmers are trained to do exactly this: automate processes.
+
+The crucial first step to understanding macros is to recognise that without careful planning and lots of effort, large portions of any programs will have redundant patterns and inflexible abstractions littered throughout. This can be seen in almost any large software project as duplicated code or as code that is needlessly complex because the right abstractions weren't available to its authors. The effective use of macros entails recognising these patterns and abstractions, and then creating code to help you code. It is not enough to understand how to write macros; a professional lisp programmer needs to know why to write macros.
+
+C programmers who are new to lisp often make the mistake of assuming that the primary purpose of a macro is to improve the efficiency of code at run-time2. While macros are often very useful for this task, by far the most common use of a macro is to make the job of programming a desired application easier. Because large portions of the patterns in most programs are redundantly copied and the generality of their abstractions not fully exploited, properly designed macros can enable programming on literally new planes of expression. Where other languages are rigid and specific, lisp is fluid and generic.
+
+This book is not an introduction to lisp. The topics and material are aimed at professional programmers of non-lisp languages who are curious as to what macros have to offer, and at intermediate lisp students who are ready to really learn what makes lisp special. Basic to intermediate knowledge of lisp programming is assumed, but a deep understanding of closures and macros is not.
+
+This book is also not about theory. All examples involve working, usable code that can help improve your programming, today and now. This book is about using advanced programming techniques to help you program better. In contrast to many other programming books that deliberately use a simple programming style in an attempt to improve accessibility, this book takes the view that the best approach to teaching programming is full utilisation of the language. Although many of the provided code samples use esoteric features of COMMON LISP, such potentially unfamiliar features are described as they are used. For calibration, if you have read and understood3 everything in chapter 2, Closures and chapter 3, Macro Basics, for the purposes of this book you can consider yourself past the intermediate stage of lisp understanding.
+
+Part of lisp is discovering things yourself and this book will not deprive you of that. Be warned that this book moves more quickly than most, more quickly than you might be used to. To understand some of the code in this book you may need to consult additional COMMON LISP tutorials or references. After we cover the basics we will move directly into explaining some of the most advanced macro research to-date, much of which borders a large, unexplored gray-area of intellectual terrain. As does all advanced macro programming, this book focuses heavily on combinations of macros. This topic has a frightening reputation and is well understood by few, if any, programmers. Combinations of macros represent the most vast and fertile area of research in programming languages today. Academia has squeezed out most of the interesting results from types, objects, and prolog-style logic, but macro programming remains a huge, gaping black hole. Nobody really knows what lies beyond. All we know is that, yes, it is complicated and frightening and currently appears boundless in potential. Unlike too many other programming ideas, the macro is neither an academic concept for churning out useless theoretical publications, nor an empty enterprise software buzzword. Macros are a hacker's best friend. Macros let you program smarter, not harder. Most programmers who come to understand macros decide they never again want to program without them.
+
+While most lisp books are written to make lisp more popular, I am completely unconcerned with lisp's day-to-day public appeal. Lisp isn't going away. I would be perfectly happy if I could continue to use lisp as a secret weapon for the remainder of my programming career. If this book has only one purpose, it is to inspire the study and research of macros, just as I have been inspired by them in On Lisp. I hope readers of this book might also be so inspired that some day I might enjoy even better lisp macro tools and even more interesting lisp macro books.
+
+Still in awe of lisp's power,
+
+your humble author,
+
+Doug Hoyte
+
+U-Language
+Since discussing macros involves discussing discussion itself, we need to be very clear about the conventions we are adopting for this book. What I am writing right now, as conveyed to you by what you are reading and interpreting, is itself a system of expression worth formalising and analysing.
+
+Nobody has understood this better than Haskell Curry, the author of Foundations Of Mathematical Logic[FOUNDATIONS]. Curry, because he was not only trying to formalise ideas, but also the very expression of ideas, found it necessary to abstract this concept of a communicative language between writer and reader. He called it the U-Language.
+
+Every investigation, including the present one, has to be communicated from one person to another by means of language. It is expedient to begin our study by calling attention to this obvious fact, by giving a name to the language being used, and by being explicit about a few of its features. We shall call the language being used the U-Language. [...] There would be no point in calling attention to it, if it were not for the fact that language is more intimately related to our job than of most others.
+
+Throughout this book we will introduce key new concepts or points that otherwise deserve emphasis in this special font. When referencing special forms, functions, macros, and other identifiers found in a program, either presented or foreign, we will use this special font (notice that some words have multiple meanings, for example lambda the COMMON LISP macro versus lambda the concept; let the special form versus a list that is a let form).
+
+EXAMPLE-PROGRAM-LISTING
+(defun example-program-listing ()
+  '(this is
+     (a (program
+          (listing)))))
+In this book new pieces of code are introduced in the form of program listings. Code that is designed for re-use, or for an example of proper implementation, is presented as in the definition of our function example-program-listing. But sometimes we wish to demonstrate the use of a bit of code or just want to discuss properties of some expressions without departing the flow of the written text4. In those cases, the code, or example uses of the code, will appear like so:
+
+(this is
+  (demonstration code))
+Much writing that teaches programming makes heavy use of isolated, contrived examples to illustrate a point but forgets to tie it in with reality. This book's examples try to be as minimal and direct as possible in order to illustrate the big-picture programming ideas currently being explained. Some writing tries to hide being boring by using cute, quirky identifier names or skin-deep analogies in its examples. Our examples serve only to illustrate ideas. That said, above all this book tries not to take itself (or anything) too seriously. There is humour here, the difference is that you need to look for it.
+
+Because of lisp's interactive nature, the results of evaluating a simple expression can often convey more than the equivalent quantity of U-Language. In such cases, this is how we will show the output from a COMMON LISP Read Evaluate Print Loop (called the REPL):
+
+```lisp
+(this is
+  (the expression
+    (to evaluate)))
+```
+
+THIS-IS-THE-RESULT
+Notice how the text we enter is in lower-case but the text returned from lisp is in upper-case. This is a feature of COMMON LISP that allows us to easily scan a REPL print-out and know which expressions we entered versus which were printed out by lisp. More precisely, this feature lets us quickly scan any lisp form that contains symbols?in any file or on any screen?and instantly know whether it has yet been processed by the lisp reader. Also notice that the asterisk character (*) represents a prompt. This character is ideal because it can't be confused with a balanced character and because of its high pixel count that makes it stand out clearly when scanning a REPL session.
+
+Writing complicated lisp macros is an iterative process. Nobody sits down and hammers out a page-long macro in the cavalier style common to programs in other languages. This is partly because lisp code contains much more information per page than most other languages and also partly because lisp technique encourages programmers to grow their programs: refining them in a series of enhancements dictated by the needs of the application.
+
+This book distinguishes types of lisp, like COMMON LISP and Scheme, from the more abstract notion of lisp the building material. Another important distinction is made between lisp programming languages and non-lisp programming languages. Sometimes we need to talk about non-lisp languages and, to make as few enemies as possible, would like to avoid picking on any language in particular. To do so, we resort to the following unusual definition:
+
+A language without lisp macros is a Blub.
+
+The U-language word Blub comes from an essay by Paul Graham, Beating the Averages[BEATING-AVGS], where Blub is a hypothetical language used to highlight the fact that lisp is not like other languages: lisp is different. Blub is characterised by infix syntax, annoying type systems, and crippled object systems but its only unifying trait is its lack of lisp macros. Blub terminology is useful to us because sometimes the easiest way to understand an advanced macro technique is to consider why the technique is impossible in Blub. The purpose of Blub terminology is not to poke fun at non-lisp languages5.
+
+ITERATIVE-PROCESS-EXAMPLE
+(defun example-function% () ; first try
+  t)
+
+(defun example-function%% () ; second try
+  t)
+
+(defun example-function () ; got it!
+  t)
+In order to illustrate the iterative process of macro creation, this book adopts the convention where the percent (%) character is appended to the names of functions and macros whose definitions are incomplete or are yet to be improved upon in some other way. Multiple revisions can result in multiple % characters on the end of a name before we settle on the final version with no % characters.
+
+Macros are described in Curry's terminology as meta-programming. A meta-program is a program with the sole purpose of enabling a programmer to better write programs. Although meta-programming is adopted to various extents in all programming languages, no language adopts it as completely as lisp. In no other language is the programmer required to write code in such a way to convenience meta-programming techniques. This is why lisp programs look weird to non-lisp programmers: how lisp code is expressed is a direct consequence of its meta-programming needs. As this book attempts to describe, this design decision of lisp?writing meta-programs in lisp itself?is what gives lisp the stunning productivity advantages that it does. However, because we create meta-programs in lisp, we must keep in mind that meta programming is different from U-Language specification. We can discuss meta-languages from different perspectives, including other meta-languages, but there is only one U-Language. Curry makes this clear for his system as well:
+
+We can continue to form hierarchies of languages with any number of levels. However, no matter how many levels there are, the U-Language will be the highest level: if there are two levels, it will be the meta-language; if there are three levels, it will be the meta-meta-language; and so on. Thus the terms U-Language and meta-language must be kept distinct.
+
+This is a book about lisp, of course, and lisp's logic system is very different than that described by Curry so we will adopt few other conventions from his work. But Curry's contributions to logic and meta-programming continue to inspire us to this day. Not only because of his profound insights regarding symbolic quotation, but also his beautifully phrased and executed U-Language.
+
+The Lisp Utility
+On Lisp is one of those books that you either understand or you don't understand. You either adore it or you fear it. Starting with its very title, On Lisp is about creating programming abstractions which are layers on top of lisp. After we've created these abstractions we are free to create more programming abstractions which are successive layers on earlier abstractions.
+
+In almost any language worth using, large portions of the language's functionality is implemented with the language itself; Blub languages usually have extensive standard libraries written in Blub. When even implementors don't want to program in the target language, you probably won't want to either.
+
+But even after considering the standard libraries of other languages, lisp is different. In the sense that other languages are composed of primitives, lisp is composed of meta-primitives. Once macros are standardised, as in COMMON LISP, the rest of the language can be boot-strapped up from essentially nothing. While most languages just try to give a flexible enough set of these primitives, lisp gives a meta-programming system that allows any and all sorts of primitives. Another way to think about it is that lisp does away with the concept of primitives altogether. In lisp, the meta-programming system doesn't stop at any so-called primitives. It is possible, in fact desired, for these macro programming techniques used to build the language to continue on up into the user application. Even applications written by the highest-level of users are still macro layers on the lisp onion, growing through iterations.
+
+In this light, there being primitives in a language at all is a problem. Any time there is a primitive, there is a barrier, a non-orthogonality, in the design of the system. Sometimes, of course, this is warranted. Most programmers have no problem treating individual machine code instructions as primitives for their C or lisp compilers to handle. But lisp users demand control over nearly everything else. No other languages are, with respect to the control given to the programmer, as complete as lisp.
+
+Heeding the advice of On Lisp, the book you are currently reading was itself designed as another layer on the onion. In the same sense that programs are layered on other programs, this book is layered on On Lisp. It is the central theme of Graham's book: well-designed utilities can, when combined, work together to give a greater than the sum of the parts productivity advantage. This section describes a collection of useful utilities from On Lisp and elsewhere.
+
+MKSTR-SYMB
+(defun mkstr (&rest args)
+  (with-output-to-string (s)
+    (dolist (a args) (princ a s))))
+
+(defun symb (&rest args)
+  (values (intern (apply #'mkstr args))))
+Symb, layered upon mkstr, is a general way of creating symbols. Since symbols can be referenced by any arbitrary string, and creating symbols programmatically is so useful, symb is an essential utility for macro programming and is used heavily throughout this book.
+
+GROUP
+(defun group (source n)
+  (if (zerop n) (error "zero length"))
+  (labels ((rec (source acc)
+             (let ((rest (nthcdr n source)))
+               (if (consp rest)
+                   (rec rest (cons
+                               (subseq source 0 n)
+                               acc))
+                   (nreverse
+                     (cons source acc))))))
+    (if source (rec source nil) nil)))
+Group is another utility that consistently pops up when writing macros. Part of this is because of the need to mirror operators like COMMON LISP's setf and psetf that already group arguments, and part of it is because grouping is often the best way to structure related data. Since we use this functionality so often, it makes sense to make the abstraction as general as possible. Graham's group will group by any provided grouping amount, specified by the parameter n. In cases like setf, where the arguments are grouped into pairs, n is 2.
+
+FLATTEN
+(defun flatten (x)
+  (labels ((rec (x acc)
+             (cond ((null x) acc)
+                   ((atom x) (cons x acc))
+                   (t (rec
+                        (car x)
+                        (rec (cdr x) acc))))))
+    (rec x nil)))
+Flatten is one of the most important utilities in On Lisp. Given an arbitrarily nested list structure, flatten will return a new list containing all the atoms reachable through that list structure. If we think of the list structure as being a tree, flatten will return a list of all the leaves in the tree. If that tree represents lisp code, by checking for the presence of certain objects in an expression, flatten accomplishes a sort of code-walking, a recurring theme throughout this book.
+
+FACT-AND-CHOOSE
+(defun fact (x)
+  (if (= x 0)
+    1
+    (* x (fact (- x 1)))))
+
+(defun choose (n r)
+  (/ (fact n)
+     (fact (- n r))
+     (fact r)))
+Fact and choose are the obvious implementations of the factorial and binomial coefficient functions.
+
+License
+Because I believe the concepts behind the code presented in this book are as fundamental as physical observations or mathematical proofs, even if I wanted to I don't believe I could claim their ownership. For that reason you are basically free to do whatever you want with the code from this book. Here is the very liberal license distributed with the code:
+
+;; This is the source code for the book
+;; _Let_Over_Lambda_ by Doug Hoyte.
+;; This code is (C) 2002-2008, Doug Hoyte.
+;;
+;; You are free to use, modify, and re-distribute
+;; this code however you want, except that any
+;; modifications must be clearly indicated before
+;; re-distribution. There is no warranty,
+;; expressed nor implied.
+;;
+;; Attribution of this code to me, Doug Hoyte, is
+;; appreciated but not necessary. If you find the
+;; code useful, or would like documentation,
+;; please consider buying the book!
+The text of this book is (C) 2008 Doug Hoyte. All rights reserved.
+
+Thanks
+Brian Hoyte, Nancy Holmes, Rosalie Holmes, Ian, Alex, all the rest of my family; syke, madness, fyodor, cyb0rg/asm, theclone, blackheart, d00tz, rt, magma, nummish, zhivago, defrost; Mike Conroy, Sylvia Russell, Alan Paeth, Rob McArthur, Sylvie Desjardins, John McCarthy, Paul Graham, Donald Knuth, Leo Brodie, Bruce Schneier, Richard Stallman, Edi Weitz, Peter Norvig, Peter Seibel, Christian Queinnec, Keith Bostic, John Gamble; the designers and creators of COMMON LISP, especially Guy Steele, Richard Gabriel, and Kent Pitman, the developers and maintainers of CMUCL/SBCL, CLISP, OpenBSD, GNU/Linux.
+
+Special thanks to Ian Hoyte for the cover design and Leo Brodie for the back-cover cartoon.
+
+This book is dedicated to everyone who loves programming.
+* 2. Closures
+- [URL](https://letoverlambda.com/index.cl/guest/chap2.html)
+** JP
+*** クロージャ指向プログラミング
+私たちが到達した結論の1つは、「オブジェクト」がプログラミング言語の原始的な概念である必要はなさるという点でした。代入可能な値セルと古き良きラムダ式以外のオブジェクトとその動作を構築できます。---ガイ・スティール、スキームのデザインについて
+
+時には閉鎖と呼ばれ、保存された語彙環境と呼ばれることもあります。または、私たちの何人かが言いたいように、ラムダをやり直しましょう。どんな用語を使っても、このクロージャーの概念を習得することは、プロのlispプログラマーになるための最初のステップです。実際、このスキルは、PerlやJavascriptなど、letやラムダを明示的に含まないものであっても、多くの現代のプログラミング言語を適切に使用するために不可欠です。
+
+閉鎖は、非常に単純であるため、逆説的に難しい数少ない好奇心の概念の1つです。プログラマが複雑な問題解決に慣れると、同じ問題に対する単純な解決策が不完全で不快に感じられます。しかし、すぐにわかるように、クロージャはオブジェクトよりもデータとコードを整理する方法の問題に対するより簡単で直接的な解決策になります。クロージャは、その単純さよりも重要ですが、マクロを構築する際に使用する抽象化の方が、このマニュアルのトピックです。
+
+クロージャプリミティブを使ってオブジェクトやクラスを構築できるということは、オブジェクトシステムがlispプログラマにとって役に立たないことを意味するものではありません。それから遠く離れています。実際、COMMON LISPには、これまでに考案された最も強力なオブジェクト システムの 1 つであるCLOS、COMMON LISPオブジェクト システムが含まれています。私は、CLOSの柔軟性と機能に非常に感銘を受けていますが、私はめったにそのより高度な機能を使用する必要性を見つける1 代入可能な値セルと古き良きラムダ式のおかげです。
+
+この本の多くは合理的なレベルのlispスキルを前提としていますが、この章では、非常に基本的なクロージャの理論と使用を教えるだけでなく、この本の残りの部分で使用されるクロージャの共通の用語を提供しようとします。また、クロージャの効率に関する考察と、最新のコンパイラがどの程度適切に最適化しているかを考察します。
+
+環境と範囲
+スティールが割り当て可能な値セルによって意味することは、環境が不定範囲と呼ばれるものに従うデータへのポインタを格納するための環境です。これは、私たちが将来いつでもそのような環境を参照し続けることができるという派手な言い方です。この環境を割り当てると、その環境とその参照は、必要な限り残ります。次の C 関数を考えてみましょう。
+
+#include <stdlib.h>
+
+int *environment_with_indefinite_extent(int input) {
+  int *a = malloc(sizeof(int));
+  *a = input;
+  return a;
+}
+この関数を呼び出して返すポインタを受け取った後、割り当てられたメモリをいつまでも参照し続けることができます。C では、関数を呼び出すときに新しい環境が作成されますが、C プログラマは関数の外部で使用するために必要なメモリを返すときに、必要なメモリをmalloc()に知っています。
+
+対照的に、以下の例には欠陥があります。C プログラマは、環境がスタックに割り当てられているため、関数が戻ったときに、が自動的に収集されると考えます。つまり、lisp プログラマによれば、 aは一時エクステントで割り当てられます。
+
+int *environment_with_temporary_extent(int input) {
+  int a = input;
+  return &a;
+}
+C 環境と lisp 環境の違いは、lisp を明示的に指示しない限り、常に不定範囲を使用することを前提としていることです。つまり、lisp は常に上記のようにmalloc()を呼び出すことを前提としています。これは、一時的な範囲を使用するよりも本質的に効率が低いと主張することができますが、ほとんどの場合、利点は限界パフォーマンスコストを超えています。さらに、lisp は、データをスタックに安全に割り当てることができ、自動的に割り当てられる時期を決定することがよくあります。宣言を使用して、これを明示的に行うように lisp に指示することもできます。宣言については、第 7 章「マクロ効率のトピック」で詳しく説明します。
+
+しかし、lisp の動的な性質上、明示的なポインタ値や C のような型はありません。C プログラマとして、ポインターと値をキャストして型を示す場合、これは混乱を招く可能性があります。Lispは、このすべてについて少し異なる考え方をします。lispでは、便利なマントラは次のとおりです。
+
+変数には型がありません。型を持つ値のみ。
+
+それでも、ポインタを保持するために何かを返す必要があります。lisp には、ポインタを格納できるデータ構造が多数あります。lispプログラマが最も好むのは、単純な構造です:短所セル.各短所セルは、愛情を込めて車と呼ばれる2つのポインタを保持し、無期限範囲の環境が呼び出されると、入力として渡されたものを指し示す車と、cdrがnilを指す短所セルが返されます。そして、最も重要なことは、この短所セル(そしてそれに伴う入力へのポインタ)は無期限の範囲を持っているので、必要な限りそれを参照し続けることができます:
+
+(defun environment-with-indefinite-extent (input)
+  (cons input nil))
+lispコンパイル技術における最先端の技術が向上するにつれて、無期限の範囲の効率の欠点は無関係に近づいている。環境と範囲は閉鎖と密接に関連しており、この章を通してそれらについてより多くのことを述べるでしょう。
+
+語彙と動的スコープ
+変数参照が有効であると見なす専門用語はスコープ です。現代言語で最も一般的なスコープの種類は、字句スコープと呼ばれます。コードのフラグメントが変数の字句バインディングで囲まれている場合、その変数はバインディングの構文スコープ内にあると言われます。バインドを作成する最も一般的な方法の 1 つであるlet form は、次の構文スコープ変数を導入できます。
+
+(let ((x 2))
+  x)
+
+2
+letフォームの本体の中のxは、字句スコープを通じてアクセスされました。同様に、lambdaまたはdefunによって定義される関数の引数も、関数定義のテキスト内の字句的にバインドされた変数です。字句変数は、上記のlet form のコンテキスト内に現れるコードによってのみアクセスできる変数です。構文スコープは、変数へのアクセス範囲を制限する直感的な方法であるため、これが唯一の方法であるように見えます。スコープの可能性は他にありますか?
+
+不定範囲と語彙スコープの組み合わせが判明したように、最近まで主流のプログラミング言語では最大限に使用されていませんでした。最初の実装は、Lisp 1.5[HISTORY-OF-LISP]のスティーブ・ラッセルによって、その後アルゴル60、スキーム、およびCOMMON LISPのような言語に直接設計されました。この長く実りある歴史にもかかわらず、語彙のスコープの多くの利点は、ゆっくりと多くのBlubsによって取り上げられています。
+
+C のような言語で提供されるスコープの方法は限られていますが、C プログラマは異なる環境でプログラムを行う必要があります。そのために、多くの場合、ポインタ スコープと呼ばれる、正確に定義されたスコープを使用します。ポインタースコープは、デバッグが困難で、多数のセキュリティ リスク、そしてやや人為的に効率が高いという点で有名です。ポインタスコープの背後にある考え方は、最近のCPU(PAIP-PIX)と同様に、Von Neummanマシンのレジスタとメモリを制御するためのドメイン固有の言語を定義し、この言語を使用して、プログラムを実行しているCPUに対してかなり直接的なコマンドでデータ構造にアクセスして操作することです。適切な lisp コンパイラが開発される前に、パフォーマンス上の理由からポインタスコープが必要でしたが、現在では現代のプログラミング言語の機能ではなく、問題と見なされています。
+
+lisp プログラマはポインタの観点から考えることはほとんどありませんが、ポインタスコープの理解は、効率的な lisp コードの構築において非常に重要です。セクション 7.4, Pointer Scopeでは、特定のコードの作成についてコンパイラに指示する必要があるまれなケースについて、ポインター スコープの実装を調査します。しかし、今のところ、私たちはその仕組みについて話し合う必要があります。Cでは、記述している関数の外部で定義された変数にアクセスしたい場合があります。
+
+#include <stdio.h>
+
+void pointer_scope_test() {
+  int a;
+  scanf("%d", &a);
+}
+上記の関数では、C &演算子を使用して、スキャンするデータを書き込む場所を知るために、ローカル変数aのメモリ内の実際のアドレスをscanf関数に渡します。lisp の構文スコープは、これを直接実装することを禁じています。lisp では、匿名関数を仮定 lisp scanf関数に渡し、構文の範囲外でscanfが定義されていても、構文変数を設定することができます。
+
+(let (a)
+  (scanf "%d" (lambda (v) (setf a v))))
+語彙の範囲は、クロージャの有効化機能です。実際、クロージャは、この構文スコープの概念に非常に関連しているため、他のタイプのクロージャと区別するために、より具体的には語彙のクロージャと呼ばれることがよくあります。特に記載がない限り、この本のすべてのクロージャーは語彙です。
+
+構文のスコープに加えて、COMMON LISPは動的スコープを提供します。これは、一時的なエクステントとグローバル スコープの組み合わせのための lispスラングです。動的スコープは、非常に異なる動作を提供するが、字句スコープと同じ構文を共有するという点で、lisp に固有のスコープの一種です。COMMON LISPでは、動的スコープでアクセスされる変数に対して特殊変数を呼び出して、注意を喚起することを意図的に選択します。これらの特殊変数はdefvarで定義できます。プログラマの中には、*temp-special*のように、特別な変数名にアスタリスクを付けて前置きし、後で付けるという規則に従う人もいます。これはイヤーマフ条約と呼ばれています。セクション 3.7, 構文の二重性で説明されている理由から、このマニュアルはイヤーマフを使用しないので、特殊変数宣言は次のようになります。
+
+(defvar temp-special)
+このように定義すると、臨時スペシャルはスペシャル2に指定されますが、値で初期化されません。この状態では、特殊変数は非バインドと言われます。非バインドできるのは特殊変数のみで、語彙変数は常にバインドされ、常に値を持ちます。このもう 1 つの考え方は、デフォルトですべてのシンボルが構文的に非バインド変数を表すということです。語彙変数と同様に、setqまたはsetfを使用して特殊変数に値を割り当てることができます。Scheme のような一部のリスプには動的スコープがありません。他の場合は、ユーリスプ[SMALL-PIECES-P46]のように、構文と特殊変数にアクセスするための構文が異なります。しかし、COMMON LISPでは構文が共有されます。多くのリスパーはこれを特徴と考えています。ここでは、特別な変数の一時特殊に値を割り当てます。
+
+(setq temp-special 1)
+これまでのところ、この特別な変数はそれほど特別ではないようです。これは、何らかのグローバル名前空間にバインドされた別の変数のようです。これは、既定の特殊グローバル バインドという 1 回だけバインドしているためです。特殊変数は、新しい環境によって再バインドまたはシャドウされるときに最も興味深いものです。単に評価し、一時特殊を返す関数を定義する場合:
+
+(defun temp-special-returner ()
+  temp-special)
+この関数を使用して、lisp がtemp-specialを評価する値を、呼び出された時点での時点で調べることができます。
+
+(temp-special-returner)
+
+1
+これは、null 字句環境でのフォームの評価と呼ばれることもあります。null 字句環境には、明らかに字句バインディングは含まれていません。ここで返される一時特殊値は、グローバルな特殊値 1 の値です。しかし、非ヌル語彙環境(特殊変数のバインディングを含む)で評価すると、臨時特殊性の特殊性は3 :
+
+(let ((temp-special 2))
+  (temp-special-returner))
+
+2
+値 2 が返された場合、つまり、一時特殊値は、グローバルな特殊値ではなく、let環境から取得されたことを意味します。それでも面白いと思えない場合は、Blub疑似コードのこの部分に例示されているように、他のほとんどの従来のプログラミング言語でこれを行うことができない方法を参照してください。
+
+int global_var = 0;
+
+function whatever() {
+  int global_var = 1;
+  do_stuff_that_uses_global_var();
+}
+
+function do_stuff_that_uses_global_var() {
+  // global_var is 0
+}
+メモリの場所または構文バインディングのレジスタの割り当てはコンパイル時4で認識されていますが特殊な変数バインディングは、実行時に、ある意味で決定されます。巧妙なトリックのおかげで、特別な変数は見かけほど非効率的ではありません。特殊変数は、実際には常にメモリ内の同じ場所を参照します。letを使用して特殊変数をバインドする場合、実際には、変数のコピーを格納するコードでコンパイルし、メモリの場所を新しい値で上書きし、let body 内のフォームを評価し、最後にコピーから元の値を復元します。
+
+特殊変数は、名前を付けるために使用されるシンボルに永続的に関連付けられます。特殊変数によって参照されるメモリ内の位置は、シンボルのシンボル値セルと呼ばれます。これは、字句変数とは対照的です。字句変数はコンパイル時にシンボルでしか示しません。字句変数はバインディングの構文スコープ内からしかアクセスできないため、コンパイラは、構文変数を参照するために使用されたシンボルを覚えておく必要さえないので、コンパイルされたコードからそれらを削除します。私たちは、セクション6.7、パンドリックマクロでこの声明の真実を伸ばします。
+
+COMMON LISPは動的スコープの非常に貴重な機能を提供しますが、構文変数が最も一般的です。動的スコープは、以前は lisp の特徴でしたが、COMMON LISP以来、ほとんど完全に語彙スコープに置き換えられました。レキシカル スコープは、(ここでは、まもなく検討する) 語彙のクロージャ、より効果的なコンパイラの最適化などを可能にするので、動的スコープの置き換えは、ほとんどが良いことと見なされます。しかし、COMMON LISPの設計者は、私たちにダイナミックスコープの世界に非常に透明なウィンドウを残しています。
+
+ラムダにしよう
+対応するフォームを評価した結果に初期化された名前(バインディング)を持つ環境を作成するためのlisp特別な形式です。これらの名前は、フォームが連続して評価され、最終的なフォームの結果を返す間、let body 内のコードで使用できます。letが行うことは明確ではありませんが、それがどのように行うかは意図的に不特定のままでした。letが行うことは、それがどのように行うかから分離されています。どういうわけか、値へのポインタを格納するためのデータ構造を提供する必要があります。
+
+短所細胞は、上記で見たようにポインタを保持するのに間違いなく有用ですが、使用できる多くの構造があります。lisp にポインタを格納する最良の方法の 1 つは、letフォームを使用して lisp が注意を払う方法です。これらのポインタに名前を付ける(バインドする)だけで済み、lispは、それらを保存する最善の方法を理解します。宣言の形式で情報の余分なビットを与えることによって、コンパイラがこれをより効率的にするのを助けることができる場合があります。
+
+(defun register-allocated-fixnum ()
+  (declare (optimize (speed 3) (safety 0)))
+  (let ((acc 0))
+    (loop for i from 1 to 100 do
+      (incf (the fixnum acc)
+            (the fixnum i)))
+    acc))
+たとえば、レジスタ割り当てフィックスナムでは、コンパイラにヒントを提供し、1から100までの整数を非常に効率的に合計できるようにします。コンパイル時に、この関数はレジスタにデータを割り当て、ポインタを完全に必要としません。accとiを保持する無限の範囲の環境を作るようにlispに依頼したようですが、lispコンパイラは値をCPUレジスタだけに格納することでこの関数を最適化することができます。結果として、次のマシン コードが返されます。
+
+; 090CEB52:       31C9             XOR ECX, ECX
+;       54:       B804000000       MOV EAX, 4
+;       59:       EB05             JMP L1
+;       5B: L0:   01C1             ADD ECX, EAX
+;       5D:       83C004           ADD EAX, 4
+;       60: L1:   3D90010000       CMP EAX, 400
+;       65:       7EF4             JLE L0
+fixnum はコンパイル済みコードで 2 ビットシフトされるため、4 は 1 を表し、400 は 100 を表します。これは、何かがポインタであるふりをするが、実際にはデータをその中に格納する方法をタグ付けすることと関係があります。lisp コンパイラのタグ付けスキームには、ワードアライメント メモリ[DESIGN-OF-CMUCL]のインデックスを作成するためにシフトを行う必要がならないという優れた利点があります。lisp コンパイラの詳細については、第 7 章「 マクロ効率のトピック 」を参照してください。
+
+しかし、lisp が後でこの環境を参照する可能性があると判断した場合は、レジスタよりも一時的ではないものを使用する必要があります。環境にポインターを格納するための一般的な構造は配列です。各環境に配列があり、その環境内に囲まれたすべての変数参照がこの配列への参照だけである場合、無限の範囲を持つ効率的な環境があります。
+
+前述のように、本体の最終形態の評価を返します。これは多くの lisp 特殊なフォームやマクロに共通しているので、このパターンは、この5以外の何もするように設計されたprogn特殊形式のために暗黙的なプログと呼ばれることが多い.let フォームを返す最も貴重なことは、let フォームによって提供される字句的な環境を利用する匿名関数です。lisp でこれらの関数を作成するには、ラムダを使用します。
+
+Lambdaは柔軟性と重要性を持つため、威圧的なシンプルなコンセプトです。lispとスキームからのラムダは、アロンゾ教会の論理システムにそのルーツを負っていますが、進化し、完全に独自のlisp仕様に適応しています。ラムダは、特定の字句コンテキストの値に一時名(バインディング)を繰り返し割り当てる簡潔な方法であり、lispの関数の概念の根底にあります。lisp関数は教会が考えていた数学関数の記述とは大きく異なります。これは、ラムダが何世代にもわたるリスパーの手で強力で実用的なツールとして進化し、初期の論理学者が予見したよりもはるかに遠くまで伸ばして拡張してきたからです。
+
+プログラマがラムダのために持っている敬虔なlispにもかかわらず、表記について本質的に特別なものはありません。ご覧のとおり、ラムダはこのような変数の命名を表現する多くの方法の 1 つにすぎません。特に、マクロを使用すると、他のプログラミング言語では事実上不可能な方法で変数の名前を変更できます。しかし、これを調べ終えたら、ラムダに戻り、そのような命名を表現するための最適な表記法に非常に近いということを発見します。これは偶然ではありません。教会は、彼が私たちの現代のプログラミング環境に見えるかもしれないように、日付と無関係のように、本当に何かに乗っていました。彼の数学的表記法は、lispの専門家の世代の手の中でその数多くの強化と共に、柔軟な、一般的なツール6に進化しました.
+
+ラムダは非常に便利なので、lispの多くの機能と同様に、ほとんどの現代言語はlispから独自のシステムにアイデアをインポートし始めています。一部の言語設計者は、ラムダが長すぎると感じ、代わりにfnやその他の略語を使用します。一方、ラムダを概念と考える人もいるので、より少ない名前で隠すのは異端の隣にあります。本書ではラムダの多くのバリエーションについて説明し、探求しますが、私たちの前にlispプログラマの世代と同じように、ラムダと呼んでいます。
+
+しかし、lispのラムダとは何ですか?まず、lispのすべての名前と同様に、ラムダはシンボルです。私たちはそれを引用し、比較し、リストに保存することができます。ラムダは、リストの最初の要素として表示される場合にのみ特別な意味を持ちます。このリストが表示されると、リストはラムダフォームまたは関数指定子と呼ばれます。しかし、この形式は関数ではありません。この形式は、関数特殊形式を使用して関数に変換できるリストデータ構造です。
+
+(function '(lambda (x) (+ 1 x)))
+
+#<Interpreted Function>
+COMMON LISP は、#'(シャープ引用符)読み取りマクロを使用して、これに対する便利なショートカットを提供します。上記のように関数を記述する代わりに、同じ効果のために、このショートカットを利用することができます:
+
+#'(lambda (x) (+ 1 x))
+
+#<Interpreted Function>
+さらに便利な機能として、lambda は上記の関数特殊形式の呼び出しに展開するマクロとしても定義されます。COMMON LISP ANSI 規格では、次のように定義されたラムダマクロが[ANSI-CL-ISO 互換] で必要となります。
+
+(defmacro lambda (&whole form &rest body)
+  (declare (ignore body))
+  `#',form)
+今のところ無視宣言を無視する 7 .このマクロは、関数の特殊形式を関数指定子に自動的に適用する簡単な方法です。このマクロを使用すると、関数指定子が鋭い引用符で囲まれた形に展開されるため、関数指定子を評価して関数を作成できます。
+
+(lambda (x) (+ 1 x))
+
+#<Interpreted Function>
+ラムダマクロのおかげで、ラムダフォームに #' というプレフィックスを付ける理由はほとんどありません。このマニュアルでは ANSI COMMON LISP以前の環境をサポートする努力がないため、下位互換性の理由は簡単に拒否されます。しかし、文体的な異議はどうでしょうか?ポール・グラハムは、ANSI COMMON LISP[GRAHAM-ANSI-CL]で、このマクロを簡潔な利点と共に「最高の優雅さの奇妙な並べ替え」と考えています。グラハム氏の反対は、シンボルによって参照される関数をシャープにする必要があるため、システムは非対称に見えるようです。しかし、私は、ラムダ形式を鋭く引用しないことは、2番目の名前空間仕様に存在する非対称性を強調しているため、実際には文体的な改善であると考えています。シンボルに対してシャープ引用符を使用することは、2 番目の名前空間を参照するためのものですが、ラムダフォームによって作成された関数はもちろん、名前がありません。
+
+ラムダマクロを呼び出すことなく、関数呼び出しの最初の引数としてラムダフォームを使用できます。シンボルがこの位置で見つかり、lisp がシンボルのシンボル関数セルを参照していると仮定したときと同様に、ラムダ形式が見つかった場合は匿名関数を表すと想定されます。
+
+((lambda (x) (+ 1 x)) 2)
+
+3
+しかし、通常の関数呼び出しで使用されるシンボルを動的に返す関数を呼び出すのと同じように、関数を呼び出して関数の位置にラムダ形式を返す方法は使用できません。これらのタスクの両方に対して、funcallまたはapplyを使用します。
+
+C やその他の言語の関数に対してほとんど異性であるラムダ式の利点は、lisp コンパイラが多くの場合、それらを完全に存在から最適化できることです。たとえば、コンパイラテストは、数値 2 にインクリメント関数を適用して結果を返すように見えますが、適切なコンパイラは、この関数が常に値 3 を返し、その数値を直接返し、プロセス内の関数を呼び出さないことを知るのに十分なほど賢明になります。これはラムダ折りたたみと呼ばれます。
+
+(defun compiler-test ()
+  (funcall
+    (lambda (x) (+ 1 x))
+    2))
+重要な効率の観察は、コンパイルされたラムダ形式が定数形式であるということです。つまり、プログラムがコンパイルされた後、その関数へのすべての参照は単にマシンコードのチャンクへのポインタになります。このポインターは、関数から戻され、新しい環境に組み込まれ、すべて関数作成のオーバーヘッドなしで返されます。プログラムのコンパイル時にオーバーヘッドが吸収されました。つまり、別の関数を返す関数は、単に定数の時間ポインタの戻り関数になります。
+
+(defun lambda-returner ()
+  (lambda (x) (+ 1 x)))
+これは、実行時に新しい環境を作成するように設計されたlet form とは対照的であり、通常は、無限の範囲であるレキシカル クロージャによって暗示されるガベージ コレクションのオーバーヘッドのために、一定の操作ではありません。
+
+(defun let-over-lambda-returner ()
+  (let ((y 1))
+    (lambda (x)
+      (incf y x))))
+let-over-Lambda-returnerが呼び出されるたびに、新しい環境を作成し、ラムダフォームで表されるコードへの定数ポインタをこの新しい環境に埋め込み、結果のクロージャを返す必要があります。時間を使って、この環境の小ささを確認できます。
+
+(progn
+  (compile 'let-over-lambda-returner)
+  (time (let-over-lambda-returner)))
+
+; Evaluation took:
+;   ...
+;   24 bytes consed.
+;
+#<Closure Over Function>
+クロージャでコンパイルを呼び出そうとすると、非ヌル語彙環境で定義された関数をコンパイルできないというエラーが表示されます[CLTL2-P677]。クロージャをコンパイルすることはできません。クロージャを作成する関数をコンパイルすると、クロージャが作成したクロージャもコンパイルされます[ON-LISP-P25]。
+
+上記のラムダを囲む let の使用は非常に重要なので、この章の残りの部分ではパターンとそのバリエーションについて説明します。
+
+ラムダを越える
+ラムダを介してしてみましょうは、語彙の閉鎖に与えられたニックネームです。ラムダを介して、クロージャの作成に使用される lisp コードを、ほとんどの用語よりも厳密に反映させましょう。let over ラムダのシナリオでは、letステートメントによって返される最後のフォームはラムダ式です。それは文字通りラムダの上に座っているように見えます:
+
+(let ((x 0))
+  (lambda () x))
+
+#<Interpreted Function>
+letフォームは、本体内の最後のフォームを評価した結果を返し、ラムダ形式を超えて評価すると関数が生成されたことを思い出してください。しかし、letの最後のフォームには特別な何かがあります。これは、x をフリー変数として持つラムダ形式です。Lisp は、この関数でxが何を参照すべきかを判断するのに十分なスマートさでした: letフォームによって作成された周囲の字句環境からのx。また、lisp ではすべてがデフォルトで不定範囲であるため、この関数が必要な限り使用できる環境になります。
+
+したがって、構文スコープは、変数への参照が有効な場所と、参照が参照する内容を正確に指定するためのツールです。クロージャの簡単な例として、環境内に整数を格納し、インクリメントし、呼び出しごとにこの値を返すカウンターであるクロージャがあります。ラムダを介してレットオーバーを使用して、通常どのように実装されているかを次に示します。
+
+(let ((counter 0))
+  (lambda () (incf counter)))
+このクロージャは、最初に呼び出された時刻に 1、後続の時刻を 2 回返します。クロージャについて考える 1 つの方法は、それらが state を持つ関数であるということです。これらの関数は、数学的な関数ではなく、プロシージャであり、それぞれが独自の記憶を持っています。コードとデータをバンドルするデータ構造をオブジェクトと呼ぶことがあります。オブジェクトは、プロシージャといくつかの関連付けられた状態のコレクションです。オブジェクトはクロージャと密接に関連しているため、オブジェクトは同じものと考えることができます。クロージャは、1 つのメソッドを持つオブジェクトのようなものです: funcall.オブジェクトは、複数の方法で楽しく呼び出すことができるクロージャのようなものです。
+
+クロージャは常に単一の関数とその外側の環境ですが、オブジェクト システムの複数のメソッド、内部クラス、および静的変数はすべて、そのクロージャに対応します。複数のメソッドをシミュレートする 1 つの方法として、同じ構文スコープ内から複数のラムダを返す方法があります。
+
+(let ((counter 0))
+  (values
+    (lambda () (incf counter))
+    (lambda () (decf counter))))
+これにより、2 つのラムダパターンを介して 2 つの関数が返され、どちらも同じ囲むカウンター変数にアクセスします。最初の値はインクリメントし、2 つ目はそれを減らします。これを達成するには他にも多くの方法があります。そのうちの1つ、dlambdaはセクション5.7,Dlambdaで議論されています。説明が必要な理由から、このマニュアルのコードはオブジェクトではなくクロージャを使用してすべてのデータを構成します。ヒント: マクロと関係があります。
+
+ラムダ オーバーレット オーバー ラムダ
+オブジェクト システムによっては、オブジェクト、関連付けられた状態を持つプロシージャのコレクション、およびオブジェクトの作成に使用されるデータ構造の間に、明確な違いがあります。この区別はクロージャには存在しません。クロージャを作成するために評価できるフォームの例を見て、そのほとんどはラムダを超えるパターンに従っていますが、必要に応じてプログラムでこれらのオブジェクトを作成するにはどうすればよいでしょうか?
+
+答えは非常に簡単です。REPLで評価できれば、関数内でも評価できます。ラムダを超えて評価し、結果を返すことを唯一の目的とする関数を作成した場合はどうなりますか?関数を表すためにラムダを使用するので、次のようになります。
+
+(lambda ()
+  (let ((counter 0))
+    (lambda () (incf counter))))
+ラムダオーバーオーバーラムダが呼び出されると、カウンターバインディングを含む新しいクロージャが作成され、返されます。ラムダ式は定数であり、マシンコードへの単なるポインタです。この式は、REPL で行ったのと同じように、内部のラムダ式 (それ自体は定数、コンパイルされた形式) を閉じる新しい環境を作成する単純なコードです。
+
+オブジェクトシステムでは、オブジェクトを作成するコードの一部をクラスと呼んでいます。しかし、ラムダオーバーオーバーラムダは、多くの言語のクラスと微妙に異なります。ほとんどの言語ではクラスに名前を付ける必要がありますが、このパターンでは名前付けがまったく行われなくなります。ラムダオーバーオーバーラムダフォームは匿名クラスと呼ぶことができます。
+
+匿名クラスは便利な場合が多いですが、通常はクラス名を指定します。名前を付ける最も簡単な方法は、そのようなクラスが正規の関数であることを認識することです。通常、関数に名前を付ける方法もちろん、廃止された形で。名前を付けた後、上記の匿名クラスは次のようになります。
+
+(defun counter-class ()
+  (let ((counter 0))
+    (lambda () (incf counter))))
+最初のラムダはどこに行きましたか?Defunは、その本体のフォームの周囲に暗黙のラムダを供給します。defunを使用して通常の関数を記述すると、それらはまだ下にラムダ形式ですが、この事実は、defun構文の表面の下に隠されています。
+
+残念ながら、ほとんどのlispプログラミングブックは、閉鎖の使用の現実的な例を提供していません, 閉鎖はカウンターのようなおもちゃの例のためにのみ良いという不正確な印象を読者に残します.真実から遠ざかるものは何もない。クロージャはlispの構成要素です。環境、それらの環境内で定義された関数、およびそれらを使用して便利にするdefunのようなマクロは、問題をモデル化するために必要なすべてです。この本は、オブジェクトベースの言語に使用されるlispプログラマがCLOSのようなシステムに到達するという彼らの腸の本能に基づいて行動するのを止めることを目的としています。CLOS にはプロの lisp プログラマーを提供する特定の物がありますが、ラムダで十分な場合は使用しないでください。
+
+ブロックスキャナー
+(defun block-scanner (trigger-string)
+  (let* ((trig (coerce trigger-string 'list))
+         (curr trig))
+    (lambda (data-string)
+      (let ((data (coerce data-string 'list)))
+        (dolist (c data)
+          (if curr
+            (setq curr
+                  (if (char= (car curr) c)
+                    (cdr curr) ; next char
+                    trig))))   ; start over
+        (not curr))))) ; return t if found
+クロージャの使用を動機づけるために、現実的な例が提示されます:ブロックスキャナ.ブロックスキャナが解決する問題は、データ転送のいくつかの形式では、データが不確実なサイズのグループ(ブロック)で配信されるということです。これらのサイズは、一般的に、基盤となるシステムでは便利ですが、アプリケーションプログラマにとっては便利ではなく、多くの場合、オペレーティング システム のバッファ、ハードドライブブロック、ネットワーク パケットなどによって決定されます。特定のシーケンスのデータストリームをスキャンするには、通常のステートレスな手順で入ってくる各ブロックをスキャンするだけではありません。スキャンしているシーケンスが 2 つ (またはそれ以上) のブロックに分割される可能性があるため、各ブロックのスキャンの間の状態を保持する必要があります。
+
+この保存された状態を現代の言語で実装する最も簡単で自然な方法は、クロージャです。クロージャベースのブロックスキャナの初期スケッチは、ブロックスキャナとして与えられます。すべての lisp 開発と同様に、クロージャの作成は反復プロセスです。ブロックスキャナーで与えられたコードから始めて、リストへの文字列の強制を避けることによって効率を向上させることにしたり、シーケンスの出現数を数えて収集した情報を改善することにしました。
+
+ブロックスキャナは改善されるのを待っている初期実装ですが、ラムダオーバーのラムダを介してラムダを使用する良いデモンストレーションです。ここでは、特定のブラックリストの単語、jihadを見て何らかの通信タップを装って、その使用のデモンストレーションです:
+
+(defvar scanner
+    (block-scanner "jihad"))
+
+SCANNER
+(funcall scanner "We will start ")
+
+NIL
+# (funcall scanner "the ji")
+
+NIL
+(funcall scanner "had tomorrow.")
+
+T
+ラムダをオーバーレットオーバーラムダ
+オブジェクトシステムのユーザは、特定のクラスのすべてのオブジェクト間で共有したい値を、いわゆるクラス変数または静的変数8に格納します。.lisp では、クロージャ間で状態を共有するというこの概念は、クロージャ自体が状態を格納するのと同じ方法で環境によって処理されます。環境は無期限にアクセス可能であるため、参照できる限り、必要な限り利用可能であることが保証されます。
+
+すべてのカウンターのグローバル方向を維持し、各クロージャのカウンタをインクリメントし、デクリメントまで維持したい場合は、ラムダパターンをオーバーレットオーバーラムダを使用する必要があります。
+
+(let ((direction 'up))
+  (defun toggle-counter-direction ()
+    (setq direction
+          (if (eq direction 'up)
+            'down
+            'up)))
+
+  (defun counter-class ()
+    (let ((counter 0))
+      (lambda ()
+        (if (eq direction 'up)
+          (incf counter)
+          (decf counter))))))
+上の例では、前のセクションからカウンター クラスを拡張しました。カウンター クラスで作成された呼び出しのクロージャは、すべてのカウンターで共有される方向バインドの値に応じて、カウンター のバインドをインクリメントするか、それを減らします。また、方向環境内の別のラムダを利用するために、すべてのカウンタの現在の方向を変更するトグルカウンター方向という関数を作成します。
+
+letとラムダのこの組み合わせは、他の言語がクラスまたは静的変数の形式でそれを採用しているほど便利ですが、letとラムダの他の組み合わせがあり、オブジェクトシステムに直接アナログを持たない方法でコードと状態を構造化することができます。 .オブジェクトシステムは、レットとラムダの組み合わせのサブセットの形式化であり、時には継承のようなギミックが10にボルトで固定されています.このため、lisp プログラマはクラスやオブジェクトの観点から考えないことがよくあります。Let とラムダは基本的なものです。オブジェクトとクラスは派生物です。スティールが言うように、「オブジェクト」はプログラミング言語の原始的な概念である必要はありません。代入可能な値セルと古き良きラムダ式が使用可能になると、オブジェクトシステムは、せいぜい有用な抽象化であり、最悪の場合は特殊なケースと冗長です。
+** EN
+Closure-Oriented Programming
+One of the conclusions that we reached was that the "object" need not be a primitive notion in a programming language; one can build objects and their behaviour from little more than assignable value cells and good old lambda expressions. ?Guy Steele on the design of Scheme
+
+Sometimes it's called a closure, other times a saved lexical environment. Or, as some of us like to say, let over lambda. Whatever terminology you use, mastering this concept of a closure is the first step to becoming a professional lisp programmer. In fact, this skill is vital for the proper use of many modern programming languages, even ones that don't explicitly contain let or lambda, such as Perl or Javascript.
+
+Closures are one of those few curious concepts that are paradoxically difficult because they are so simple. Once a programmer becomes used to a complex solution to a problem, simple solutions to the same problem feel incomplete and uncomfortable. But, as we will soon see, closures can be a simpler, more direct solution to the problem of how to organise data and code than objects. Even more important than their simplicity, closures represent a better abstraction to use when constructing macros?the topic of this book.
+
+The fact that we can build objects and classes with our closure primitives doesn't mean that object systems are useless to lisp programmers. Far from it. In fact, COMMON LISP includes one of the most powerful object systems ever devised: CLOS, the COMMON LISP Object System. Although I am very impressed with the flexibility and features of CLOS, I seldom find a need to use its more advanced features1, thanks to assignable value cells and good old lambda expressions.
+
+While much of this book assumes a reasonable level of lisp skill, this chapter attempts to teach the theory and use of closures from the very basics as well as to provide a common terminology for closures that will be used throughout the rest of this book. This chapter also examines the efficiency implications of closures and considers how well modern compilers optimise them.
+
+Environments and Extent
+What Steele means by assignable value cells is an environment for storing pointers to data where the environment is subject to something called indefinite extent. This is a fancy way of saying that we can continue to refer to such an environment at any time in the future. Once we allocate this environment, it and its references are there to stay as long as we need them. Consider this C function:
+
+#include <stdlib.h>
+
+int *environment_with_indefinite_extent(int input) {
+  int *a = malloc(sizeof(int));
+  *a = input;
+  return a;
+}
+After we call this function and receive the pointer it returns, we can continue to refer to the allocated memory indefinitely. In C, new environments are created when invoking a function, but C programmers know to malloc() the required memory when returning it for use outside the function.
+
+By contrast, the example below is flawed. C programmers consider a to be automatically collected when the function returns because the environment is allocated on the stack. In other words, according to lisp programmers, a is allocated with temporary extent.
+
+int *environment_with_temporary_extent(int input) {
+  int a = input;
+  return &a;
+}
+The difference between C environments and lisp environments is that unless you explicitly tell lisp otherwise it always assumes you mean to use indefinite extent. In other words, lisp always assumes you mean to call malloc() as above. It can be argued that this is inherently less efficient than using temporary extent, but the benefits almost always exceed the marginal performance costs. What's more, lisp can often determine when data can safely be allocated on the stack and will do so automatically. You can even use declarations to tell lisp to do this explicitly. We will discuss declarations in more detail in chapter 7, Macro Efficiency Topics.
+
+But because of lisp's dynamic nature, it doesn't have explicit pointer values or types like C. This can be confusing if you, as a C programmer, are used to casting pointers and values to indicate types. Lisp thinks about all this slightly differently. In lisp, a handy mantra is the following:
+
+Variables don't have types. Only values have types.
+
+Still, we have to return something to hold pointers. In lisp there are many data structures that can store pointers. One of the most favoured by lisp programmers is a simple structure: the cons cell. Each cons cell holds exactly two pointers, affectionately called car and cdr. When environment-with-indefinite-extent is invoked, a cons cell will be returned with the car pointing to whatever was passed as input and the cdr pointing to nil. And, most importantly, this cons cell (and with it the pointer to input) has indefinite extent so we can continue to refer to it as long as we need to:
+
+(defun environment-with-indefinite-extent (input)
+  (cons input nil))
+The efficiency disadvantages of indefinite extent are approaching irrelevance as the state of the art in lisp compilation technology improves. Environments and extent are closely related to closures and more will be said about them throughout this chapter.
+
+Lexical and Dynamic Scope
+The technical term for where to consider a variable reference valid is scope. The most common type of scope in modern languages is called lexical scope. When a fragment of code is surrounded by the lexical binding of a variable, that variable is said to be in the lexical scope of the binding. The let form, which is one of the most common ways to create bindings, can introduce these lexically scoped variables:
+
+(let ((x 2))
+  x)
+
+2
+The x inside the body of the let form was accessed through lexical scope. Similarly, arguments to functions defined by lambda or defun are also lexically bound variables inside the text of the function definition. Lexical variables are variables that can only be accessed by code appearing inside the context of, for instance, the above let form. Because lexical scoping is such an intuitive way to limit the scope of access to a variable, it can appear to be the only way. Are there any other possibilities for scoping?
+
+As useful as the combination of indefinite extent and lexical scoping turns out to be, it has until recently not been used to its fullest extent in mainstream programming languages. The first implementation was by Steve Russell for Lisp 1.5[HISTORY-OF-LISP] and was subsequently designed directly into languages like Algol-60, Scheme, and COMMON LISP. Despite this long and fruitful history, the numerous advantages of lexical scoping are only slowly being taken up by many Blubs.
+
+Although the scoping methods provided by C-like languages are limited, C programmers need to program across different environments too. To do so, they often use an imprecisely defined scoping known as pointer scope. Pointer scope is famous for its difficulty to debug, numerous security risks, and, somewhat artificially, its efficiency. The idea behind pointer scoping is to define a domain specific language for controlling the registers and memory of a Von Neumman machine similar to most modern CPUs[PAIP-PIX], then to use this language to access and manipulate data-structures with fairly direct commands to the CPU running the program. Pointer scoping was necessary for performance reasons before decent lisp compilers were invented but is now regarded as a problem with, rather than a feature of, modern programming languages.
+
+Even though lisp programmers seldom think in terms of pointers, the understanding of pointer scoping is very valuable in the construction of efficient lisp code. In section 7.4, Pointer Scope we will investigate implementing pointer scoping for the rare cases where we need to instruct the compiler on specific code creation. But for now we only need discuss its mechanics. In C, we sometimes would like to access a variable defined outside the function we are writing:
+
+#include <stdio.h>
+
+void pointer_scope_test() {
+  int a;
+  scanf("%d", &a);
+}
+In the above function we use the C & operator to give the actual address in memory of our local variable a to the scanf function so it knows where to write the data it scans. Lexical scoping in lisp forbids us from implementing this directly. In lisp, we would likely pass an anonymous function to a hypothetical lisp scanf function, allowing it to set our lexical variable a even though scanf is defined outside our lexical scope:
+
+```
+(let (a)
+  (scanf "%d" (lambda (v) (setf a v))))
+```
+
+Lexical scope is the enabling feature for closures. In fact, closures are so related to this concept of lexical scope that they are often referred to more specifically as lexical closures to distinguish them from other types of closures. Unless otherwise noted, all closures in this book are lexical.
+
+In addition to lexical scope, COMMON LISP provides dynamic scope. This is lisp slang for the combination of temporary extent and global scope. Dynamic scoping is a type of scoping that is unique to lisp in that it offers a very different behaviour but shares an identical syntax with lexical scope. In COMMON LISP we deliberately choose to call attention to variables accessed with dynamic scope by calling them special variables. These special variables can be defined with defvar. Some programmers follow a convention of prefixing and postfixing special variable names with asterisks, like *temp-special*. This is called the earmuff convention. For reasons explained in section 3.7, Duality of Syntax, this book does not use earmuffs so our special variable declarations look like this:
+
+```
+(defvar temp-special)
+```
+
+When defined like this, temp-special will be designated special2 but will not be initialised with a value. In this state, a special variable is said to be unbound. Only special variables can be unbound?lexical variables are always bound and thus always have values. Another way of thinking of this is that by default all symbols represent lexically unbound variables. Just as with lexical variables, we can assign a value to special variables with setq or setf. Some lisps, like Scheme, do not have dynamic scope. Others, like EuLisp[SMALL-PIECES-P46], use different syntax for accessing lexical versus special variables. But in COMMON LISP the syntax is shared. Many lispers consider this a feature. Here we assign a value to our special variable temp-special:
+
+```
+(setq temp-special 1)
+```
+
+So far, this special variable doesn't seem that special. It seems to be just another variable, bound in some sort of global namespace. This is because we have only bound it once?its default special global binding. Special variables are most interesting when they are re-bound, or shadowed, by new environments. If we define a function that simply evaluates and returns temp-special:
+
+```
+(defun temp-special-returner ()
+  temp-special)
+```
+
+This function can be used to examine the value that lisp evaluates temp-special to be at the moment in time when it was called:
+
+```
+(temp-special-returner)
+```
+
+1
+This is sometimes referred to as evaluating the form in a null lexical environment. The null lexical environment obviously doesn't contain any lexical bindings. Here the value of temp-special returned is that of its global special value, 1. But if we evaluate it in a non-null lexical environment?one that contains a binding for our special variable?the specialness of temp-special reveals itself3:
+
+```
+(let ((temp-special 2))
+  (temp-special-returner))
+```
+
+2
+Notice that the value 2 was returned, meaning that the temp-special value was taken from our let environment, not its global special value. If this still does not seem interesting, see how this cannot be done in most other conventional programming languages as exemplified by this piece of Blub pseudo-code:
+
+```
+int global_var = 0;
+
+function whatever() {
+  int global_var = 1;
+  do_stuff_that_uses_global_var();
+}
+
+function do_stuff_that_uses_global_var() {
+  // global_var is 0
+}
+```
+
+While the memory locations or register assignments for lexical bindings are known at compile-time4, special variable bindings are determined at run-time?in a sense. Thanks to a clever trick, special variables aren't as inefficient as they seem. A special variable actually always does refer to the same location in memory. When you use let to bind a special variable, you are actually compiling in code that will store a copy of the variable, over-write the memory location with a new value, evaluate the forms in the let body, and, finally, restore the original value from the copy.
+
+Special variables are perpetually associated with the symbol used to name them. The location in memory referred to by a special variable is called the symbol-value cell of a symbol. This is in direct contrast to lexical variables. Lexical variables are only indicated with symbols at compile-time. Because lexical variables can only be accessed from inside the lexical scope of their bindings, the compiler has no reason to even remember the symbols that were used to reference lexical variables so it will remove them from compiled code. We will stretch the truth of this statement in section 6.7, Pandoric Macros.
+
+Although COMMON LISP does offer the invaluable feature of dynamic scope, lexical variables are the most common. Dynamic scoping used to be a defining feature of lisp but has, since COMMON LISP, been almost completely replaced by lexical scope. Since lexical scoping enables things like lexical closures (which we examine shortly), as well as more effective compiler optimisations, the superseding of dynamic scope is mostly seen as a good thing. However, the designers of COMMON LISP have left us a very transparent window into the world of dynamic scoping, now acknowledged for what it really is: special.
+
+Let It Be Lambda
+Let is a lisp special form for creating an environment with names (bindings) initialised to the results of evaluating corresponding forms. These names are available to the code inside the let body while its forms are evaluated consecutively, returning the result of the final form. Although what let does is unambiguous, how it does it is deliberately left unspecified. What let does is separated from how it does it. Somehow, let needs to provide a data structure for storing pointers to values.
+
+Cons cells are undeniably useful for holding pointers, as we saw above, but there are numerous structures that can be used. One of the best ways to store pointers in lisp is to let lisp take care of it for you with the let form. With let you only have to name (bind) these pointers and lisp will figure out how best to store them for you. Sometimes we can help the compiler make this more efficient by giving it extra bits of information in the form of declarations:
+
+```
+(defun register-allocated-fixnum ()
+  (declare (optimize (speed 3) (safety 0)))
+  (let ((acc 0))
+    (loop for i from 1 to 100 do
+      (incf (the fixnum acc)
+            (the fixnum i)))
+    acc))
+```
+
+For example, in register-allocated-fixnum we provide some hints to the compiler that allow it to sum the integers from 1 to 100 very efficiently. When compiled, this function will allocate the data in registers, eliminating the need for pointers altogether. Even though it seems we've asked lisp to create an indefinite extent environment to hold acc and i, a lisp compiler will be able to optimise this function by storing the values solely in CPU registers. The result might be this machine code:
+
+; 090CEB52:       31C9             XOR ECX, ECX
+;       54:       B804000000       MOV EAX, 4
+;       59:       EB05             JMP L1
+;       5B: L0:   01C1             ADD ECX, EAX
+;       5D:       83C004           ADD EAX, 4
+;       60: L1:   3D90010000       CMP EAX, 400
+;       65:       7EF4             JLE L0
+Notice that 4 represents 1 and 400 represents 100 because fixnums are shifted by two bits in compiled code. This has to do with tagging, a way to pretend that something is a pointer but actually store data inside it. Our lisp compiler's tagging scheme has the nice benefit that no shifting needs to occur to index word aligned memory[DESIGN-OF-CMUCL]. We'll get to know our lisp compiler better in chapter 7, Macro Efficiency Topics.
+
+But if lisp determines that you might want to refer to this environment later on it will have to use something less transient than a register. A common structure for storing pointers in environments is an array. If each environment has an array and all the variable references enclosed in that environment are just references into this array, we have an efficient environment with potentially indefinite extent.
+
+As mentioned above, let will return the evaluation of the last form in its body. This is common for many lisp special forms and macros, so common that this pattern is often referred to as an implicit progn due to the progn special form designed to do nothing but this5. Sometimes the most valuable thing to have a let form return is an anonymous function which takes advantage of the lexical environment supplied by the let form. To create these functions in lisp we use lambda.
+
+Lambda is a simple concept that can be intimidating because of its flexibility and importance. The lambda from lisp and scheme owes its roots to Alonzo Church's logic system but has evolved and adapted into its altogether own lisp specification. Lambda is a concise way to repeatably assign temporary names (bindings) to values for a specific lexical context and underlies lisp's concept of a function. A lisp function is very different from the mathematical function description that Church had in mind. This is because lambda has evolved as a powerful, practical tool at the hands of generations of lispers, stretching and extending it much further than early logicians could have foreseen.
+
+Despite the reverence lisp programmers have for lambda, there is nothing inherently special about the notation. As we will see, lambda is just one of many possible ways to express this sort of variable naming. In particular, we will see that macros allow us to customise the renaming of variables in ways that are effectively impossible in other programming languages. But after exploring this, we will return to lambda and discover that it is very close to the optimal notation for expressing such naming. This is no accident. Church, as dated and irrelevant as he might seem to our modern programming environment, really was on to something. His mathematical notation, along with its numerous enhancements in the hands of generations of lisp professionals, has evolved into a flexible, general tool6.
+
+Lambda is so useful that, like many of lisp's features, most modern languages are beginning to import the idea from lisp into their own systems. Some language designers feel that lambda is too lengthy, instead using fn or some other abbreviation. On the other hand, some regard lambda as a concept so fundamental that obscuring it with a lesser name is next to heresy. In this book, although we will describe and explore many variations on lambda, we happily call it lambda, just as generations of lisp programmers before us.
+
+But what is lisp's lambda? First off, as with all names in lisp, lambda is a symbol. We can quote it, compare it, and store it in lists. Lambda only has a special meaning when it appears as the first element of a list. When it appears there, the list is referred to as a lambda form or as a function designator. But this form is not a function. This form is a list data structure that can be converted into a function using the function special form:
+
+```
+(function '(lambda (x) (+ 1 x)))
+```
+
+#<Interpreted Function>
+COMMON LISP provides us a convenience shortcut for this with the #' (sharp-quote) read macro. Instead of writing function as above, for the same effect we can take advantage of this shortcut:
+
+```
+#'(lambda (x) (+ 1 x))
+```
+
+#<Interpreted Function>
+As a further convenience feature, lambda is also defined as a macro that expands into a call to the function special form above. The COMMON LISP ANSI standard requires[ANSI-CL-ISO-COMPATIBILITY] a lambda macro defined like so:
+
+(defmacro lambda (&whole form &rest body)
+  (declare (ignore body))
+  `#',form)
+Ignore the ignore declaration for now7. This macro is just a simple way to automatically apply the function special form to your function designators. This macro allows us to evaluate function designators to create functions because they are expanded into sharp-quoted forms:
+
+```
+(lambda (x) (+ 1 x))
+```
+
+#<Interpreted Function>
+There are few good reasons to prefix your lambda forms with #' thanks to the lambda macro. Because this book makes no effort to support pre-ANSI COMMON LISP environments, backwards compatibility reasons are easily rejected. But what about stylistic objections? Paul Graham, in ANSI COMMON LISP[GRAHAM-ANSI-CL], considers this macro, along with its brevity benefits, a "specious sort of elegance at best". Graham's objection seems to be that since you still need to sharp-quote functions referenced by symbols, the system seems asymmetric. However, I believe that not sharp-quoting lambda forms is actually a stylistic improvement because it highlights the asymmetry that exists in the second namespace specification. Using sharp-quote for symbols is for referring to the second namespace, whereas functions created by lambda forms are, of course, nameless.
+
+Without even invoking the lambda macro, we can use lambda forms as the first argument in a function call. Just like when a symbol is found in this position and lisp assumes we are referencing the symbol-function cell of the symbol, if a lambda form is found, it is assumed to represent an anonymous function:
+
+```
+((lambda (x) (+ 1 x)) 2)
+```
+
+3
+But note that just as you can't call a function to dynamically return the symbol to be used in a regular function call, you can't call a function to return a lambda form in the function position. For both of these tasks, use either funcall or apply.
+
+A benefit of lambda expressions that is largely foreign to functions in C and other languages is that lisp compilers can often optimise them out of existence completely. For example, although compiler-test looks like it applies an increment function to the number 2 and returns the result, a decent compiler will be smart enough to know that this function always returns the value 3 and will simply return that number directly, invoking no functions in the process. This is called lambda folding:
+
+```
+(defun compiler-test ()
+  (funcall
+    (lambda (x) (+ 1 x))
+    2))
+```
+
+An important efficiency observation is that a compiled lambda form is a constant form. This means that after your program is compiled, all references to that function are simply pointers to a chunk of machine code. This pointer can be returned from functions and embedded in new environments, all with no function creation overhead. The overhead was absorbed when the program was compiled. In other words, a function that returns another function will simply be a constant time pointer return function:
+
+```
+(defun lambda-returner ()
+  (lambda (x) (+ 1 x)))
+```
+
+This is in direct contrast to the let form, which is designed to create a new environment at run-time and as such is usually not a constant operation because of the garbage collection overhead implied by lexical closures, which are of indefinite extent.
+
+```
+(defun let-over-lambda-returner ()
+  (let ((y 1))
+    (lambda (x)
+      (incf y x))))
+```
+
+Every time let-over-lambda-returner is invoked, it must create a new environment, embed the constant pointer to the code represented by the lambda form into this new environment, then return the resulting closure. We can use time to see just how small this environment is:
+
+```
+(progn
+  (compile 'let-over-lambda-returner)
+  (time (let-over-lambda-returner)))
+```
+
+; Evaluation took:
+;   ...
+;   24 bytes consed.
+;
+#<Closure Over Function>
+
+If you try to call compile on a closure, you will get an error saying you can't compile functions defined in non-null lexical environments[CLTL2-P677]. You can't compile closures, only the functions that create closures. When you compile a function that creates closures, the closures it creates will also be compiled[ON-LISP-P25].
+
+The use of a let enclosing a lambda above is so important that we will spend the remainder of this chapter discussing the pattern and variations on it.
+
+Let Over Lambda
+Let over lambda is a nickname given to a lexical closure. Let over lambda more closely mirrors the lisp code used to create closures than does most terminology. In a let over lambda scenario, the last form returned by a let statement is a lambda expression. It literally looks like let is sitting on top of lambda:
+
+```
+(let ((x 0))
+  (lambda () x))
+```
+
+#<Interpreted Function>
+Recall that the let form returns the result of evaluating the last form inside its body, which is why evaluating this let over lambda form produced a function. However, there is something special about the last form in the let. It is a lambda form with x as a free variable. Lisp was smart enough to determine what x should refer to for this function: the x from the surrounding lexical environment created by the let form. And, because in lisp everything is of indefinite extent by default, the environment will be available for this function to use as long as it needs it.
+
+So lexical scope is a tool for specifying exactly where references to a variable are valid, and exactly what the references refer to. A simple example of a closure is a counter, a closure that stores an integer in an environment and increments and returns this value upon every invocation. Here is how it is typically implemented, with a let over lambda:
+
+(let ((counter 0))
+  (lambda () (incf counter)))
+This closure will return 1 the first time it is called, 2 the subsequent time, and so on. One way of thinking about closures is that they are functions with state. These functions are not mathematical functions, but rather procedures, each with a little memory of its own. Sometimes data structures that bundle together code and data are called objects. An object is a collection of procedures and some associated state. Since objects are so closely related to closures, they can often be thought of as one and the same. A closure is like an object that has exactly one method: funcall. An object is like a closure that you can funcall in multiple ways.
+
+Although closures are always a single function and its enclosing environment, the multiple methods, inner classes, and static variables of object systems all have their closure counterparts. One possible way to simulate multiple methods is to simply return multiple lambdas from inside the same lexical scope:
+
+(let ((counter 0))
+  (values
+    (lambda () (incf counter))
+    (lambda () (decf counter))))
+This let over two lambdas pattern will return two functions, both of which access the same enclosing counter variable. The first increments it and the second decrements it. There are many other ways to accomplish this. One of which, dlambda, is discussed in section 5.7, Dlambda. For reasons that will be explained as we go along, the code in this book will structure all data using closures instead of objects. Hint: It has to do with macros.
+
+Lambda Over Let Over Lambda
+In some object systems there is a sharp distinction between objects, collections of procedures with associated state, and classes, the data structures used to create objects. This distinction doesn't exist with closures. We saw examples of forms you can evaluate to create closures, most of them following the pattern let over lambda, but how can our program create these objects as needed?
+
+The answer is profoundly simple. If we can evaluate them in the REPL, we can evaluate them inside a function too. What if we create a function whose sole purpose is to evaluate a let over lambda and return the result? Because we use lambda to represent functions, it would look something like this:
+
+(lambda ()
+  (let ((counter 0))
+    (lambda () (incf counter))))
+When the lambda over let over lambda is invoked, a new closure containing a counter binding will be created and returned. Remember that lambda expressions are constants: mere pointers to machine code. This expression is a simple bit of code that creates new environments to close over the inner lambda expression (which is itself a constant, compiled form), just as we were doing at the REPL.
+
+With object systems, a piece of code that creates objects is called a class. But lambda over let over lambda is subtly different than the classes of many languages. While most languages require classes to be named, this pattern avoids naming altogether. Lambda over let over lambda forms can be called anonymous classes.
+
+Although anonymous classes are often useful, we usually do name classes. The easiest way to give them names is to recognise that such classes are regular functions. How do we normally name functions? With the defun form, of course. After naming, the above anonymous class becomes:
+
+(defun counter-class ()
+  (let ((counter 0))
+    (lambda () (incf counter))))
+Where did the first lambda go? Defun supplies an implicit lambda around the forms in its body. When you write regular functions with defun they are still lambda forms underneath but this fact is hidden beneath the surface of the defun syntax.
+
+Unfortunately, most lisp programming books don't provide realistic examples of closure usage, leaving readers with the inaccurate impression that closures are only good for toy examples like counters. Nothing could be further from the truth. Closures are the building blocks of lisp. Environments, the functions defined inside those environments, and macros like defun that make using them convenient, are all that are needed for modelling any problem. This book aims to stop beginning lisp programmers used to object-based languages from acting upon their gut instinct of reaching for systems like CLOS. While CLOS does have certain things to offer the professional lisp programmer, do not use it when a lambda will suffice.
+
+BLOCK-SCANNER
+(defun block-scanner (trigger-string)
+  (let* ((trig (coerce trigger-string 'list))
+         (curr trig))
+    (lambda (data-string)
+      (let ((data (coerce data-string 'list)))
+        (dolist (c data)
+          (if curr
+            (setq curr
+                  (if (char= (car curr) c)
+                    (cdr curr) ; next char
+                    trig))))   ; start over
+        (not curr))))) ; return t if found
+In order to motivate the use of closures, a realistic example is presented: block-scanner. The problem block-scanner solves is that for some forms of data transfer the data is delivered in groups (blocks) of uncertain sizes. These sizes are generally convenient for the underlying system but not for the application programmer, often being determined by things like operating system buffers, hard drive blocks, or network packets. Scanning a stream of data for a specific sequence requires more than just scanning each block as it comes in with a regular, stateless procedure. We need to keep state between the scanning of each block because it is possible that the sequence we are scanning for will be split between two (or more) blocks.
+
+The most straightforward, natural way to implement this stored state in modern languages is with a closure. An initial sketch of a closure-based block scanner is given as block-scanner. Like all lisp development, creating closures is an iterative process. We might start off with code given in block-scanner and decide to improve its efficiency by avoiding coercion of strings to lists, or possibly improve the information gathered by counting the number of occurrences of the sequence.
+
+Although block-scanner is an initial implementation waiting to be improved, it is still a good demonstration of the use of lambda over let over lambda. Here is a demonstration of its use, pretending to be some sort of communications tap watching out for a specific black-listed word, jihad:
+
+```
+(defvar scanner
+  (block-scanner "jihad"))
+```
+
+SCANNER
+
+```
+(funcall scanner "We will start ")
+```
+
+NIL
+# (funcall scanner "the ji")
+
+NIL
+```lisp
+(funcall scanner "had tomorrow.")
+```
+
+T
+Let Over Lambda Over Let Over Lambda
+Users of object systems store values they want shared between all objects of a certain class into so-called class variables or static variables8. In lisp, this concept of sharing state between closures is handled by environments in the same way that closures themselves store state. Since an environment is accessible indefinitely, as long as it is still possible to reference it, we are guaranteed that it will be available as long as is needed.
+
+If we want to maintain a global direction for all counters, up to increment each closure's counter and down to decrement, then we might want to use a let over lambda over let over lambda pattern:
+
+(let ((direction 'up))
+  (defun toggle-counter-direction ()
+    (setq direction
+          (if (eq direction 'up)
+            'down
+            'up)))
+
+  (defun counter-class ()
+    (let ((counter 0))
+      (lambda ()
+        (if (eq direction 'up)
+          (incf counter)
+          (decf counter))))))
+In the above example, we have extended counter-class from the previous section. Now calling closures created with counter-class will either increment its counter binding or decrement it, depending on the value of the direction binding which is shared between all counters. Notice that we also take advantage of another lambda inside the direction environment by creating a function called toggle-counter-direction which changes the current direction for all counters.
+
+While this combination of let and lambda is so useful that other languages have adopted it in the form of class or static variables, there exist other combinations of let and lambda that allow you to structure code and state in ways that don't have direct analogs in object systems9. Object systems are a formalisation of a subset of let and lambda combinations, sometimes with gimmicks like inheritance bolted on10. Because of this, lisp programmers often don't think in terms of classes and objects. Let and lambda are fundamental; objects and classes are derivatives. As Steele says, the "object" need not be a primitive notion in programming languages. Once assignable value cells and good old lambda expressions are available, object systems are, at best, occasionally useful abstractions and, at worst, special-case and redundant.
+* 3. Macro Basics
+- [URL](https://letoverlambda.com/index.cl/guest/chap3.html)
+** EN
+Iterative Development
+Lisp has assisted a number of our most gifted fellow humans in thinking previously impossible thoughts. ?Edsger Dijkstra
+
+The construction of a macro is an iterative process: all complex macros come from simpler macros. After starting with an idea, a rough implementation can be created from which the ultimate macro will emerge, like a sculpture from a block of stone. If the rough implementation isn't flexible enough, or results in inefficient or dangerous expansions, the professional macro programmer will slightly modify the macro, adding features or removing bugs until it satisfies all requirements.
+
+The necessity of this iterative process for macro construction is partly because this is the most efficient programming style in general and partly because programming macros is more complicated than other types of programming. Because macro programming requires the programmer to think about multiple levels of code executed at multiple points in time, the complexity issues scale more rapidly than other types of programming. An iterative process helps ensure that your conceptual model is more closely aligned to what is actually being created than if the entire macro was written without this constant feedback.
+
+In this chapter we will write some basic macros by introducing two common macro concepts: domain specific languages and control structures. Once these general macro areas are described, we take a step back and discuss the process of writing macros itself. Techniques like variable capture and free variable injection are introduced, along with the definition of a new, slightly more convenient syntax for defining lisp macros that is used throughout the remainder of this book.
+
+Domain Specific Languages
+COMMON LISP, along with most other programming environments, provides a function sleep which will pause execution of the process for n seconds, where n is a non-negative, non-complex, numeric argument. For instance, we might want to sleep for 3 minutes (180 seconds), in which case we could evaluate this form:
+
+(sleep 180)
+Or if we would rather think about sleeping in terms of minutes, we could instead use
+
+(sleep (* 3 60))
+Because compilers know how to fold constants, these two invocations are just as efficient. To be even more explicit about what we're doing, we might define a function sleep-minutes:
+
+(defun sleep-minutes (m)
+  (sleep (* m 60)))
+Defining new functions for every unit of time that we might want to use is clunky and inconvenient. What we would really like is some sort of abstraction that lets us specify the unit of time along with the value. What we really want is a domain specific language.
+
+So far, the lisp solution is the same as that of any other language: create a function that accepts a value and a unit and returns the value multiplied by some constant related to the given unit. But a possible lispy improvement becomes apparent when we consider our options for representing this unit. In languages like C it is customary to use an underlying data type like int and assign arbitrary values corresponding to the different units:
+
+#define UNIT_SECONDS 1
+#define UNIT_MINUTES 2
+#define UNIT_HOURS 3
+
+int sleep_units(int value, int unit) {
+  switch(value) {
+    case UNIT_SECONDS: return value;
+    case UNIT_MINUTES: return value*60;
+    case UNIT_HOURS: return value*3600;
+  }
+}
+SLEEP-UNITS-1
+(defun sleep-units% (value unit)
+  (sleep
+    (* value
+       (case unit
+         ((s) 1)
+         ((m) 60)
+         ((h) 3600)
+         ((d) 86400)
+         ((ms) 1/1000)
+         ((us) 1/1000000)))))
+But in lisp the most obvious way to signal the desired unit is to use a symbol. A symbol in lisp exists mostly to be something not eq to other symbols. Eq is the fastest lisp comparison operator and roughly corresponds to a pointer comparison. Since pointers can be compared very quickly, symbols provide a very fast and convenient way to let two or more different lisp expressions know you're referring to the same thing. In lisp we might define the sleep-units% function so we can specify the units in our forms:
+
+(sleep-units% 2 'm)
+(sleep-units% 500 'us)
+Because comparing symbols requires only a pointer comparison, sleep-units% will be compiled into a very fast run-time dispatch:
+
+...
+524:       CMP     ESI, [#x586FC4D0]    ; 'S
+52A:       JEQ     L11
+530:       CMP     ESI, [#x586FC4D4]    ; 'M
+536:       JEQ     L10
+538:       CMP     ESI, [#x586FC4D8]    ; 'H
+53E:       JEQ     L9
+540:       CMP     ESI, [#x586FC4DC]    ; 'D
+546:       JEQ     L8
+...
+Notice how the unit given to sleep-units% must be quoted. This is because when lisp evaluates a function it first evaluates all arguments and then binds the results to variables for use inside the function. Numbers and strings and some other primitives evaluate to themselves which is why we don't need to quote the numeric values given to sleep-units%. But notice that they are evaluated so you are permitted to quote them if you like:
+
+(sleep-units% '.5 'h)
+Symbols, however, don't typically evaluate to themselves1. When lisp evaluates a symbol it assumes you are referring to a variable and tries to look up the value associated with that variable given your lexical context (unless the variable is declared special, in which case the dynamic environment).
+
+SLEEP-UNITS
+(defmacro sleep-units (value unit)
+  `(sleep
+     (* ,value
+        ,(case unit
+           ((s) 1)
+           ((m) 60)
+           ((h) 3600)
+           ((d) 86400)
+           ((ms) 1/1000)
+           ((us) 1/1000000)))))
+To avoid quoting the unit, we need a macro. Unlike a function, a macro does not evaluate its arguments. Taking advantage of this fact, we replace the sleep-units% function with the sleep-units macro. Now we don't need to quote the unit:
+
+(sleep-units .5 h)
+Although the main purpose of this macro is to avoid having to quote the unit argument, this macro is even more efficient than the function because there is no run-time dispatch at all: the unit and therefore the multiplier are known at compile time. Of course whenever we discover this sort of too-good-to-be-true situation, it probably really is too good to be true. This gain in efficiency isn't free. By foregoing the run-time dispatch we have lost the ability to determine the time unit at run-time. This makes it impossible to execute the following code using our macro:
+
+(sleep-units 1 (if super-slow-mode 'd 'h))
+This will not work because sleep-units expects the second argument to be one of the symbols in our case statement but instead it is a list with the first element the symbol if.
+
+UNIT-OF-TIME
+(defmacro unit-of-time (value unit)
+  `(* ,value
+      ,(case unit
+         ((s) 1)
+         ((m) 60)
+         ((h) 3600)
+         ((d) 86400)
+         ((ms) 1/1000)
+         ((us) 1/1000000))))
+Recall that most macros are written to create more convenient and useful programming abstractions, not to improve the efficiency of the underlying code. Is it possible to extract any idioms from this code to make it more useful for the rest of our program (and possibly other future programs)? Even now we can foresee wanting to do other things with time values than just calling sleep on them. The macro unit-of-time abstracts functionality from the sleep-units macro, returning a value instead of calling sleep on it. The value parameter can be determined at run-time because it is evaluated then, but unit cannot because we require the information at compile-time, just like sleep-units. Here is an example:
+
+(unit-of-time 1 d)
+
+86400
+Simple macros like unit-of-time provide a better syntax for solving a specific domain of problems and can give substantial productivity and correctness advantages. We will continue the development of this unit language further in section 5.2, Top-Down Programming. Unlike most programming languages, lisp gives you the same tools available to the people who created your programming environment. Macros are good enough for implementing the COMMON LISP language and they are good enough for implementing your own domain specific languages.
+
+Control Structures
+Although this book is focused on COMMON LISP, it is written for and about the Scheme programming language as well. Scheme is a wonderful language that, although lacking many features lisp programmers take for granted, still offers a flexible enough core for the professional lisp programmer to extend as necessary2. Similarly, there are a few features Scheme programmers rely on heavily that COMMON LISP doesn't specifically address. But comparisons between the features offered by each language are, with a few exceptions, meaningless. The gaps between the two languages can be, and frequently are, bridged. The bridges we use to cross between the two languages are, of course, macros.
+
+Scheme's let form is in one respect more powerful than its COMMON LISP counterpart. Scheme's let form supports something called a named let. In Scheme, you can optionally insert a symbol before the bind list of a let form and Scheme will bind a function named by the provided symbol around the let body3. This function accepts new arguments for the values provided in the let bindings, providing a very convenient way to express loops.
+
+NLET
+(defmacro nlet (n letargs &rest body)
+  `(labels ((,n ,(mapcar #'car letargs)
+              ,@body))
+     (,n ,@(mapcar #'cadr letargs))))
+Luckily we can build a bridge between Scheme and COMMON LISP with the nlet macro. Nlet lets us code in a Scheme style by emulating Scheme's named lets. In nlet-fact, nlet is used to define the factorial function by using a named let:
+
+(defun nlet-fact (n)
+  (nlet fact ((n n))
+    (if (zerop n)
+      1
+      (* n (fact (- n 1))))))
+Because nlet is one of our first macros, let's slow down and analyse it in depth. Sometimes to understand a macro it helps to macroexpand an example use of this macro4. To do that, provide a list representing this macro invocation to the macroexpand function. Notice that macroexpand will only expand macros that have their symbols in the first element of the list and will not expand nested macro invocations for you5. In the following, we've copied an invocation of nlet directly from nlet-fact, quoted it, and passed it to macroexpand:
+
+(macroexpand
+  '(nlet fact ((n n))
+     (if (zerop n)
+       1
+       (* n (fact (- n 1))))))
+
+(LABELS ((FACT (N)
+           (IF (ZEROP N)
+             1
+             (* N (FACT (- N 1))))))
+  (FACT N))
+T
+The expansion uses the labels special form to bind a function around the provided body. The function is named according to the symbol used in the named let form. It takes as arguments the values bound with nlet, here only n. Since this function can be recursive, nlet implements a useful iteration construct.
+
+Although simple macros might just be filling out backquote templates, most complicated macros at minimum make use of lisp's extensive list processing functions. Mapcar, applying a function to every element in a list and returning a list of the resulting values, turns up especially often in macros. Tellingly, mapcar turns up often in regular lisp code as well. Lisp has been tuned to be as useful as possible for processing lists. In all kinds of lisp programming, including macro construction, we splice, merge, reduce, map, and filter lists. The only difference is that when programming macros, the output subsequently gets passed to a compiler or interpreter. Programming macros in lisp is actually the same process as programming regular lisp.
+
+But what does it mean to say that nlet is a new control structure? A control structure is just a fancy way of describing some construct that doesn't follow the behaviour of a function. A function will evaluate each argument from left to right, bind the results in an environment, and execute machine code specified by some lambda form. Since nlet doesn't evaluate its arguments directly, instead splicing them into some chunk of lisp code, we have changed the flow of evaluation for nlet forms and thus have created a new control structure.
+
+By this broad definition, virtually all macros?at least all interesting macros?define new control structures. When people say "only use macros when functions won't do", they mean that for any definition where you don't want to evaluate certain arguments, or you want to evaluate them out of order, or more than once, you will need to use a macro. Functions, no matter how cleverly written, simply will not work.
+
+The nlet macro demonstrates one way that COMMON LISP was designed for macro writers. In binding forms such as let, it is a common convention for a variable to be bound to nil if no value is specified along with the variable name. In other words, (let ((a)) a) will be nil6. In Scheme, a language slightly less macro-writer friendly, this case must be checked for as a special case when iterating through such bindings because (car nil) and (cdr nil) raise type errors. In COMMON LISP, (car nil), (cdr nil), and therefore (car (cdr nil)) and (cadr nil) are defined to return nil, allowing the second mapcar in nlet to work even if the empty let variable convention is used. This COMMON LISP feature is from Interlisp[INTERLISP].
+
+Our nlet macro is different from Scheme's named lets in one subtle way. In this case, the interface to the macro is acceptable but the expansion may not be. As is common when programming across multiple levels, our mental model of the code can easily be slightly different from reality. In Scheme, a tail call of a named let is guaranteed to take up no additional stack space since Scheme is required, by the standard, to make this specific optimisation. This is not the case in COMMON LISP, however, so it is possible for stack overflows to occur in our COMMON LISP version of nlet that would not happen with named lets in Scheme. In section 5.4, Code-Walking with Macrolet we will see how to write a version of nlet with an identical interface but a potentially more efficient expansion7.
+
+Free Variables
+A free variable is any variable or function referenced in an expression that doesn't have a global special binding or an enclosing lexical binding. In the following expression, x is free:
+
+(+ 1 x)
+But in the following, we create a binding around the form which captures the variable x, depriving it of its freedom:
+
+(let ((x 1))
+  (+ 1 x))
+The terminology of freedom and capture may seem strange at first. After all, freedom implies consciousness and an ability to make decisions?something a simple expression is obviously lacking. But freedom doesn't refer to what the expression can do, rather what we, as programmers, can do with the expression. For example, we can take the expression (+ 1 x) and embed it anywhere we want, allowing our expression to access a binding named x in the surrounding code. We then say that the code has captured our free variable. After the free variables in an expression are captured, as in the above let form, other surrounding code has no option of capturing our variable x. Our formerly free variable has already been captured. It is now completely unambiguous which x it refers to. Because of this, there isn't really any need for lisp to keep the reference to the symbol x in the code at all. As was described in detail in section 2.3, Lexical and Dynamic Scope, lisp compilers will forget the symbols that were used to represent lexical variables.
+
+Although any language with expressions can have expressions with free variables, lisp's macro capabilities mean that free variables are much more useful in lisp than in other languages. In most languages we are forced to obey referential transparency. If there is no global or object variable x defined in a Blub program, the following code is unconditionally incorrect:
+
+some_function_or_method() {
+  anything(1 + x);
+}
+There is no way that some_function_or_method can create an implicit binding for x. In Blub, any use of a variable must have a textually apparent definition8. Languages with primitive macro systems (like C) can accomplish some of this in a very limited sense. But just as general purpose macros are impractical or impossible to write in C, so are the special cases involving free variables.
+
+In lisp we can push around expressions with free variables as we please and either splice them into new expressions for them to be captured by surrounding code, or define global special variables to capture them. We can also write macros to modify which variables are free in an expression, either by re-writing the expression so it has fewer free variables (say by wrapping it in a let form, as above) or by modifying the expression in a way that adds new free variables. Such addition of free variables is the opposite of capturing variables and is called free variable injection.
+
+The simplest possible free variable injection is a macro that expands into a symbol reference:
+
+(defmacro x-injector ()
+  'x)
+Because a macro is just a function, it executes its body as a regular lisp form. The above injector macro evaluates the quoted symbol and, of course, returns a symbol?a free variable?to be spliced into any expression that uses the x-injector macro. Discussing such free variable injection in On Lisp, Paul Graham writes
+
+This kind of lexical intercourse is usually viewed more as a source of contagion than a source of pleasure. Usually it would be bad style to write such a macro. Of all the macros in this book, only [two isolated cases] use the calling environment in this way.
+
+By contrast, this book gets much pleasure from this sort of lexical intercourse. Free variable injection?writing a macro with full knowledge of the lexical environment it will be expanded in?is just another approach to lisp macro programming, one that is especially useful when there are a few slightly different lexical contexts that you would like to write mostly identical code inside. Although often the main advantage of a function call is that you throw out your lexical environment, sometimes, to lisp programmers, this is just a guide-line that can be ignored through the use of macros. In fact, once accustomed to it, some lisp programmers try to always write macros, extending the lexical context as far as possible, using a function only when they need to evaluate arguments or just chicken out and want a new lexical context. In section 3.6, Once Only we will see a way to avoid throwing out your lexical environment when you need arguments evaluated. Keeping the lexical environment around as much as possible allows for very interesting macro combinations, where a macro adds lexical context around a use of one or more other macros. Expanding into code that uses the very macro being defined is a special case of macro combination and is treated in section 5.5, Recursive Expansions.
+
+The shortest distance between two points is a straight line. Free variables and, more generally, extended lexical contexts are often the easiest way to programmatically construct a program. Using macros in this way might seem like a hack, and might feel objectionable on stylistic grounds, but it works conveniently and reliably. Especially after we consider macrolet in section 5.4, Code-Walking with Macrolet, this style of programming?combining macros?will begin to feel more comfortable. Just remember that macro programming is not about style; it is about power. Macros allow us to do many things that are impossible in other languages. Free variable injection is one of them.
+
+Unwanted Capture
+There are two perspectives on variable capture. Variable capture is the source of some very unpredictable bugs but when used properly can also be a highly desirable macro feature. Let's start our consideration of variable capture with a simple macro defined by Graham in On Lisp: nif. Nif is a numeric if which has four required clauses, compared to the regular boolean if that has two required clauses and an optional third clause. Nif, or rather the code that nif expands into, evaluates the first clause and assumes the result to be a non-complex number. It then evaluates one of the three respective clauses, depending on whether the result is positive (plusp), zero (zerop), or negative (otherwise). We can use it to test the variable x like so:
+
+(nif x "positive" "zero" "negative")
+Nif is the ideal function for our discussion of variable capture and we will use it to illustrate a few key points and also as a test case for a new notation for macro construction. Before we present the version of nif defined by Graham, let's define a nearly correct, but slightly buggy version:
+
+(defmacro nif-buggy (expr pos zero neg)
+  `(let ((obscure-name ,expr))
+     (cond ((plusp obscure-name) ,pos)
+           ((zerop obscure-name) ,zero)
+           (t ,neg))))
+Nif-buggy expands into a bit of code that uses let to bind the result of evaluating the user's supplied expr form. We need to do this because it is possible that evaluating expr will incur side-effects and we need to use its value for two separate things: passing it to plusp and passing it to zerop. But what do we call this temporary binding? To introduce a subtle bug we chose an arbitrary symbol, obscure-name. Unless someone looks at the macro expansion, nobody will ever see this name anyways, so it's no big deal, right?
+
+Nif-buggy will appear to work like nif in almost all cases. As long as the symbol obscure-name is never used in the forms supplied to nif-buggy9 then there is no possibility for unwanted variable capture. But what happens if obscure-name does appear in forms passed? In many cases, there is still no bug:
+
+(nif-buggy
+  x
+  (let ((obscure-name 'pos))
+    obscure-name)
+  'zero
+  'neg)
+Even if x turns out to be positive, and even though we have injected the forbidden symbol into nif-buggy's macroexpansion, this code still works as intended. When a new binding is created, and the references inside that binding always refer to the created binding, no unwanted variable capture occurs. The problem only appears when our usage of obscure-name crosses over its use in the expansion. Here is an example of unwanted variable capture:
+
+(let ((obscure-name 'pos))
+  (nif-buggy
+    x
+    obscure-name
+    'zero
+    'neg))
+In this case, obscure-name will be bound to the result of the evaluation of x, so the symbol pos will not be returned as was intended10. This is because our use of a symbol crossed over an invisible use of a binding. Sometimes code with invisible bindings like this is said to not be referentially transparent.
+
+But isn't this just an academic issue? Surely we can think of rare enough names so that the problem never shows up. Yes, in many cases, packages and smart variable naming can solve the problem of variable capture. However, most serious variable capture bugs don't arise in code directly created by a programmer. Most variable capture problems only surface when other macros use your macro (combine with your macro) in ways you didn't anticipate. Paul Graham's has a direct answer for why to protect against unwanted variable capture:
+
+Why write programs with small bugs when you could write programs with no bugs?
+
+I think we can distill the issue even further: no matter how subtle, why do something incorrectly when you can do it correctly?
+
+Luckily, it turns out that variable capture, to the extent that it is a problem, is a solved problem with an easy solution. That last sentence is a controversial statement to many people, especially those who have decided they don't like the obvious solution and have dedicated large portions of time looking for a better one. As a professional macro programmer you will come into contact with many of these variable capture solutions. The current popular solution is to use so-called hygienic macros11. These solutions try to limit or eliminate the impact of unwanted variable capture but unfortunately do so at the expense of wanted, desirable variable capture. Almost all approaches taken to reducing the impact of variable capture serve only to reduce what you can do with defmacro. Hygienic macros are, in the best of situations, a beginner's safety guard-rail; in the worst of situations they form an electric fence, trapping their victims in a sanitised, capture-safe prison. Furthermore, recent research has shown that hygienic macro systems like those specified by various Scheme revisions can still be vulnerable to many interesting capture problems[SYNTAX-RULES-INSANE][SYNTAX-RULES-UNHYGIENIC].
+
+The real solution to variable capture is known as the generated symbol, or gensym for short. A gensym is a way of having lisp pick the name of a variable for us. But instead of picking lame names like obscure-name as we did previously, lisp picks good names. Really good names. These names are so good and unique that there is no way anyone (even gensym itself) will ever pick the same names again. How is this possible? In COMMON LISP, symbols (names) are associated with packages. A package is a collection of symbols from which you can get pointers to by providing strings, their symbol-name strings. The most important property of these pointers (usually just called symbols) is that they will be eq to all other pointers (symbols) that have been looked up in that package with that same symbol-name. A gensym is a symbol that doesn't exist in any package, so there is no possible symbol-name that will return a symbol eq to it. Gensyms are for when you want to indicate to lisp that some symbol should be eq to some other symbol in an expression without having to name anything at all. Because you aren't naming anything, name collisions just can't happen.
+
+So by following these three simple, very important rules, avoiding unwanted variable capture in COMMON LISP is easy:
+
+Whenever you wrap a lexical or dynamic binding around code provided to your macro, name this binding with a gensym unless you want to capture it from the code you are wrapping.
+
+Whenever you wrap a function binding or a macrolet or symbol-macrolet macro around code provided to your macro, name this function or macro with a gensym unless you want to capture it from the code you are wrapping. Verify that this binding doesn't conflict with any of the special forms, macros, or functions defined by the standard.
+
+Never assign or re-bind a special form, macro, or function specified by COMMON LISP.
+
+Some lisps other than COMMON LISP, like Scheme, have the unfortunate property of combining the variable namespace with the function/macro namespace. Sometimes these lisps are termed lisp-1 lisps, while COMMON LISP, with its separate namespaces, is termed a lisp-2 lisp. With a hypothetical lisp-1 COMMON LISP we would also be obliged to follow these two additional rules when constructing macros:
+
+Verify that intentionally introduced lexical or dynamic bindings do not collide with intentionally introduced function or macro bindings, or any of the special forms, macros, or functions defined by the standard.
+
+Verify that intentionally introduced function or macro bindings do not collide with intentionally introduced lexical or dynamic bindings.
+
+COMMON LISP's wise design decision to separate the variable namespace from the function namespace eliminates an entire dimension of unwanted variable capture problems. Of course lisp-1 lisps do not suffer any theoretical barrier to macro creation: if we follow the previous two rules, we can avoid variable capture in the same way as we do in COMMON LISP. However, when programming sophisticated macros it can be hard enough to keep track of symbols in a single, isolated namespace. Having any cross-pollination of names to consider just makes macro writing more difficult than it needs to be.
+
+More so than any other property except possibly its incomplete standard12, it is this defect of a single namespace that makes Scheme, an otherwise excellent language, unfit for serious macro construction13. Richard Gabriel and Kent Pitman summarise the issue with the following memorable quote[LISP2-4LIFE]:
+
+There are two ways to look at the arguments regarding macros and namespaces. The first is that a single namespace is of fundamental importance, and therefore macros are problematic. The second is that macros are fundamental, and therefore a single namespace is problematic.
+
+Because there is little of less importance than the quantity of namespaces, and little of more importance than the enabling of macros, it can only be concluded that Scheme made the wrong decision and COMMON LISP made the right decision.
+
+Still, calling gensym every single time we want a nameless symbol is clunky and inconvenient. It is no wonder that the Scheme designers have experimented with so-called hygienic macro systems to avoid having to type gensym all over the place. The wrong turn that Scheme took was to promote a domain specific language for the purpose of macro construction. While Scheme's mini-language is undeniably powerful, it misses the entire point of macros: macros are great because they are written in lisp, not some dumbed down pre-processor language.
+
+This book presents a new syntax for gensyms that should be more palatable to the brevity-conscious yet remains a thin film over traditional lisp expressions. Our new notation for gensyms, which we will use as the foundation for most of the macros in this book, is most clearly described by peeling off the layers of a simple macro which uses the features our notation offers. Let's continue with the nif example from the previous section. Here is how Graham defines a capture-safe nif:
+
+(defmacro nif (expr pos zero neg)
+  (let ((g (gensym)))
+    `(let ((,g ,expr))
+       (cond ((plusp ,g) ,pos)
+             ((zerop ,g) ,zero)
+             (t ,neg)))))
+This is how to use gensym correctly. As we saw in the previous section, a macro that can expand user input into something that could interfere with one of its variables must take care against variable capture. Graham presents a macro abbreviation with-gensyms that is somewhat more concise for situations where a number of gensyms need to be created:
+
+(with-gensyms (a b c)
+  ...)
+Expands into
+
+(let ((a (gensym))
+      (b (gensym))
+      (c (gensym)))
+  ...)
+Because needing gensyms in a defmacro form is so common, we decide to pursue the abbreviation further. In particular, notice that we have to type the temporary name for each of the gensyms (like a, b, and c) at least twice: once when we declare it a gensym and again when we use it. Can we eliminate this redundancy?
+
+First, consider how the nif macro uses gensyms. When the nif macro is expanded, it calls gensym which returns a generated symbol. Because this symbol is guaranteed to be unique, we can safely splice it into a macro expansion knowing that it will never capture any unintended references. But we still need to name this gensym in the definition of the macro so we are able to splice it into the expansion in the right places. Graham, for the scope of the nif macro definition, names this gensym g. Notice that this name never actually appears in the macro expansion of nif:
+
+(macroexpand '(nif x 'pos 'zero 'neg))
+
+(LET ((#:G1605 X))
+  (COND ((PLUSP #:G1605) 'POS)
+        ((ZEROP #:G1605) 'ZERO)
+        (T 'NEG)))
+T
+The name g disappears in the macro expansion. Because g was only bound in our expander environment, the name given to such a variable is irrelevant with respect to capture in the expansions. All occurrences of g have, in the expansion, been replaced by a symbol with a print name of G1605. It is prefixed by #: because the symbol is not interned in any package?it is a gensym. When printing out forms, it is necessary to prefix gensyms in such a way because we want lisp to break if we ever use (evaluate) this form after reading it back in again. We want lisp to break because we can't know by looking at the print names of two gensyms if they should be eq or not?that is their purpose. Lisp breaks in an interesting way: because each time a #: symbol is read in a new symbol is created, and because (eq '#:a '#:a) is never true, the inner #:G1605 symbols in the above expansion do not refer to the binding created by the let form so lisp considers the expression to have a free variable, indicating to us that a form with gensyms was read back in again.
+
+Despite the default printing behaviour for such uninterned symbols, it is still possible to save and reload macro expansions. For a more accurate printed representation of a form with gensyms, we can turn on *print-circle* mode when we print the results14:
+
+(let ((*print-circle* t))
+  (print
+    (macroexpand '(nif x 'pos 'zero 'neg)))
+  t)
+
+(LET ((#1=#:G1606 X))
+  (COND ((PLUSP #1#) 'POS)
+        ((ZEROP #1#) 'ZERO)
+        (T 'NEG)))
+T
+In the above form, the lisp printer uses the #= and ## read macros. These read macros allow us to create self-referential forms which we will discuss in more depth in section 4.5, Cyclic Expressions. If we read in the above form, the symbols used inside will actually be the same as the symbol used in the let binding and the expansion will still work. It seems as though the above definition has avoided the dual-naming redundancy. Is there a way we can pull this back up into a macro writing macro template?
+
+G-BANG-SYMBOL-PREDICATE
+(defun g!-symbol-p (s)
+  (and (symbolp s)
+       (> (length (symbol-name s)) 2)
+       (string= (symbol-name s)
+                "G!"
+                :start1 0
+                :end1 2)))
+Remember that we can name our gensyms anything in the macro definition, even, as Graham does, simple names like g, and they will disappear in the macro expansion. Because of this freedom in naming, let's standardise on a naming convention for gensyms. As a compromise between brevity and uniqueness, any symbol that starts with the two characters G!, and is followed by at least one other character is considered to be a special gensym referencing symbol called a G-bang symbol. We define a predicate, g!-symbol-p, which is a predicate for determining whether a given atom is a G-bang symbol.
+
+DEFMACRO-WITH-G-BANG
+(defmacro defmacro/g! (name args &rest body)
+  (let ((syms (remove-duplicates
+                (remove-if-not #'g!-symbol-p
+                               (flatten body)))))
+    `(defmacro ,name ,args
+       (let ,(mapcar
+               (lambda (s)
+                 `(,s (gensym ,(subseq
+                                 (symbol-name s)
+                                 2))))
+               syms)
+         ,@body))))
+Now that we have G-bang symbols standardised, we can create a macro that writes macro definitions for us and exploits a macro writing shortcut known as automatic gensyms. The macro defmacro/g! defines a domain specific language for the domain of macro writing, but manages to retain all of lisp's power. Defmacro/g! is simple, but how to use it, and how it works, may be non-obvious. Because of this, and because this is one of the first real macros we've presented in this book, we take the analysis of defmacro/g! slowly.
+
+When dissecting any macro, the first step is to stop. Don't think of a macro as a syntax transformation or any other such nonsense abstraction. Think of a macro as a function. A macro is a function underneath, and works in the exact same way. The function is given the unevaluated expressions provided to it as arguments and is expected to return code for lisp to insert into other expressions.
+
+So, thinking about defmacro/g! as a function, consider its execution. Because we are programming a regular lisp function, we have access to all of lisp's features, even utilities we've since added to the language. In defmacro/g!, we use Graham's flatten utility, lisp's remove-if-not and remove-duplicates functions, and our G-bang symbol predicate g!-symbol-p to create a new list consisting of all the G-bang symbols found inside the body form that was passed to our macro. Next, we use a backquote template to return a list representing the code we would like the macro to expand into. In our case, because we're writing an improvement to defmacro, we would like our code to expand to a defmacro form itself. But we are adding new convenience features to the defmacro language and want to create a slightly more sophisticated expansion. In order to give each G-bang symbol found in the macro's body a fresh gensym, we use mapcar to map a function over the list of collected G-bang symbols, creating a new list that can be spliced into the let form, establishing bindings for each gensym15.
+
+Notice how the lambda that we map contains an expression created with the backquote operator, resulting in what appears to be?but is not?a nested backquote situation. Because the mapcar that applies this function is unquoted, the unquoted expressions in the nested backquote are still evaluated in our original context. Nested backquotes are notoriously difficult to understand and we will return to this concept when we look at backquote in more depth in chapter 4, Read Macros.
+
+So what, exactly, does defmacro/g! let us do? It lets us exploit this technique of automatic gensyms, a way of checking for the presence of particular symbols in the lexical scope of code provided to the macro16. If we don't use any G-bang symbols, we can use defmacro/g! exactly like defmacro. But any G-bang symbols that occur in the body of the macro expansion are interpreted to mean:
+
+I want a gensym to be bound around this expression, and I've already given the symbol. Make it happen.
+
+We can use this to save having to explicitly create a gensym in this re-definition of nif:
+
+(defmacro/g! nif (expr pos zero neg)
+  `(let ((,g!result ,expr))
+     (cond ((plusp ,g!result) ,pos)
+           ((zerop ,g!result) ,zero)
+            (t ,neg))))
+When we want to use a gensym we just use it. We need to be careful, of course, that all references to G-bang symbols are only evaluated by the macro expansion because that is the only place where the gensym will be bound17. Unquoting the G-bang symbols that occur inside a backquote, like above, is the most obvious way to do this, and we can see the direct parallel to the unquoting of the symbol g in Graham's original definition of nif.
+
+So we have defined a macro nif that appears to function the same as Graham's, but this improvement almost seems too good to be true. Does it really work? Let's look at the macro expansion18 before we decide:
+
+(macroexpand-1
+  '(defmacro/g! nif (expr pos zero neg)
+     `(let ((,g!result ,expr))
+        (cond ((plusp ,g!result) ,pos)
+              ((zerop ,g!result) ,zero)
+              (t ,neg)))))
+
+(DEFMACRO NIF (EXPR POS ZERO NEG)
+  (LET ((G!RESULT (GENSYM "RESULT")))
+    `(LET ((,G!RESULT ,EXPR))
+       (COND ((PLUSP ,G!RESULT) ,POS)
+             ((ZEROP ,G!RESULT) ,ZERO)
+             (T ,NEG)))))
+T
+It seems that defmacro/g! wrote essentially the same code that Graham did when he wrote the original version of nif. Seeing this example use of defmacro/g!, we see that no non-gensym bindings will be created in its expansions. Nif, defined with defmacro/g! like this, is free from variable capture problems.
+
+But since defmacro/g! is a macro itself, is it possible that there could be unwanted capture or substitution problems in the macro expansion environment? As with any sufficiently complex abstraction, the behaviour is, to an extent, arbitrary. In the same sense that variable capture itself is a flaw, certain properties of defmacro/g! that might appear to be flaws could simply be inherent to its design19. As always, the best solution is to understand the abstraction completely.
+
+An interesting corner-case of defmacro/g! is in G-bang macro defining G-bang macros. All defmacro/g! does is introduce a set of bindings into the expansion environment, each of which is bound to a gensym that the macro can use, if it wants. In cases where there are multiple possibilities of where the gensym could be bound, they are always distinguishable because of context. In other words, you can always specify which environment's gensym should be used based on which environment you evaluate it in. Take this contrived example:
+
+(defmacro/g! junk-outer ()
+  `(defmacro/g! junk-inner ()
+     `(let ((,g!abc))
+        ,g!abc)))
+Here there are two gensyms created. The uses of g!abc are preceded by only one unquote (comma) so we know that the expansion refers to the inner gensym created by the expansion of junk-inner. If each had instead two unquotes, they would refer to the outer gensym created by the expansion of junk-outer.
+
+Defmacro/g! uses Graham's flatten function. Flatten, as described in section 1.3, The Lisp Utility, takes a tree cons structure?our lisp code?and returns a new list of all the leaves/atoms. The use of flatten in defmacro/g! is a simple example of code-walking, a topic we will revisit throughout this book.
+
+Exercise: In the above G-bang macro defining G-bang macro, what would be the problem if the first gensym was prefixed with one unquote and the other was prefixed with two?
+
+Once Only
+Peter Norvig is a brilliant programmer and author. His books on AI, especially Artificial Intelligence: A Modern Approach[AIMA], are required reading before tackling many of the most difficult problems we currently face as computer scientists. Norvig is perhaps better known to lisp programmers for his book Paradigms Of Artificial Intelligence Programming: Case Studies in COMMON LISP[PAIP]. This book is dated but still required reading for serious lisp students and contains many important lisp insights20. This section is dedicated to Peter Norvig and is even named after a macro described in PAIP. In its last few pages, tucked away in a description of sequence function implementation, is
+
+Once-only: A Lesson in Macrology
+
+Which is shortly followed by an even more intriguing sentence:
+
+[I]f you can understand how to write and when to use once-only, then you truly understand macros.
+
+As we now know, nobody truly understands macros. Understanding a particular macro, even one as important as once-only, gets you no further to understanding macros than understanding an important theorem gets you to truly understanding mathematics. Because their possibilities so far seem infinite, truly understanding math or macros is truly impossible.
+
+We will not give the definition of Norvig's once-only here, but it is a reasonably complex macro with some interesting properties that we will implement slightly differently. Once-only was originally written for the deceased lisp machine programming environment and was left out of COMMON LISP for inconsequential reasons.
+
+The idea behind once-only is to surround a macro expansion with code that will create a new binding. When the macro expansion is evaluated, this binding will be initialised with the result of evaluating one of the forms passed to the macro as an argument. The code in the body of once-only can then use the binding which, of course, does not re-evaluate the form that was passed to the macro. The form passed as an argument to the macro is only and always evaluated once. Once-only.
+
+As an example of once-only, Norvig shows a square macro. Its expansion takes one argument and returns the product of that argument with itself:
+
+(defmacro square (x)
+  `(* ,x ,x))
+This will work when we pass a lot of things to it: most variables, numbers, and other forms that can freely be evaluated as many times as necessary. But as soon as forms that have side-effects are passed to this version of square, all bets are off. The behaviour is, of course, still deterministic, but can be decidedly difficult to determine. With this particular macro, the form will be evaluated exactly twice. But because these things get complicated quickly, in the general case, all bets are off. Making it convenient and easy to avoid these unwanted side-effects is the point of once-only. Notice that if we use a function, we get this behaviour for free. After we depart the land of contrived text-book examples, come to our senses, and define square as a function, it ends up looking like this:
+
+(defun square (x)
+  (* x x))
+Because of how lambda works, we can use any form as the argument to this function definition of square. Since this argument will be evaluated exactly once, our notions and conceptual models of side-effects are satisfied. In most instances we expect an expression that we've written only once to be evaluated only once. Conversely, one of the main powers of a macro is to violate this assumption by manipulating the frequency and order of evaluation. In things like loops, for instance, we might want expressions to be evaluated more than once. We might even want them to never be evaluated, say because we want from them something other than their evaluation.
+
+Once-only allows us to specify particular parameters in our macro expansion that we would like to only be evaluated once and have their order of evaluation be left-to-right, just like lambda. Here is how we would accomplish this with the traditional once-only macro:
+
+(defmacro square (x)
+  (once-only (x)
+    `(* ,x ,x)))
+But of course if all you ever wanted to do was once-only all the arguments of your macro, you would be using a function (lambda) instead. We will return to this point in a moment, but because this book doesn't supply a direct implementation of once-only, we introduce an alternate implementation of this functionality for our macro notation. Although there are many interesting implementations of once-only[PAIP-P853][PRACTICAL-CL-P95], this section introduces a new technique involving a combination with defmacro/g!.
+
+The first step in our once-only implementation is to create some new predicates and utility functions. Again compromising brevity with uniqueness, we reserve another set of symbols for our own use. All symbols starting with the characters O! and followed by one or more characters are called O-bang symbols.
+
+O-BANG-SYMBOLS
+(defun o!-symbol-p (s)
+  (and (symbolp s)
+       (> (length (symbol-name s)) 2)
+       (string= (symbol-name s)
+                "O!"
+                :start1 0
+                :end1 2)))
+
+(defun o!-symbol-to-g!-symbol (s)
+  (symb "G!"
+        (subseq (symbol-name s) 2)))
+A predicate to distinguish O-bang symbols from other objects is defined: o!-symbol-p. Its definition is nearly identical to that of g!-symbol-p. We also introduce a convenient utility function that changes an O-bang symbol into a G-bang symbol, preserving the characters after the bang: o!-symbol-to-g!-symbol. This utility function uses Graham's handy utility function symb to create new symbols.
+
+DEFMACRO-BANG
+(defmacro defmacro! (name args &rest body)
+  (let* ((os (remove-if-not #'o!-symbol-p args))
+         (gs (mapcar #'o!-symbol-to-g!-symbol os)))
+    `(defmacro/g! ,name ,args
+       `(let ,(mapcar #'list (list ,@gs) (list ,@os))
+          ,(progn ,@body)))))
+Defmacro! represents the final step in our macro defining language?it adds a once-only feature. Defmacro! combines with defmacro/g! from the previous section. Since defmacro! expands directly into a defmacro/g! form, it inherits the automatic gensym behaviour. Understanding all the pieces being combined is essential for sophisticated combinations. Recall that defmacro/g! looks for symbols starting with G-bang and automatically creates gensyms. By expanding into a form with G-bang symbols, defmacro! can avoid duplicating gensym behaviour when it implements once-only.
+
+Defmacro! gives a shortcut known as automatic once-only. With automatic once-only we can prefix one or more of the symbols in the macro's arguments with an O-bang, making them O-bang symbols as defined by o!-symbol-p. When we do this, defmacro! will know we mean to create a binding in the produced code that will, when evaluated, contain the results of evaluating the code provided as an argument to the macro. This binding will be accessible to the macro expansion through a gensym. But when creating the expansion how can we refer to this gensym? By using the equivalent G-bang symbol as defined above by o!-symbol-to-g!-symbol.
+
+The implementation relies on the capabilities of defmacro/g!. With the o!-symbol-to-g!-symbol utility, we create new G-bang symbols to add into a defmacro/g! form. Once we have automatic gensyms, once-only is easy to implement, as evidenced by the brevity of the defmacro! definition.
+
+Come back to the land of contrived textbook examples for a moment and we will re-implement the square macro, this time with defmacro!:
+
+(defmacro! square (o!x)
+  `(* ,g!x ,g!x))
+Which we can macroexpand to:
+
+(macroexpand
+  '(square (incf x)))
+
+(LET ((#:X1633 (INCF X)))
+  (* #:X1633 #:X1633))
+T
+In the previous section I mentioned that we pass a string value to gensym for all G-bang symbols. This makes examining the expansions of such forms much easier. Although there is nothing significant about the name of gensyms like #:X1633, if we were writing or debugging the defmacro! definition of square above, we could directly see the connection between this symbol and the symbol used in the macro definition: X. Being able to match symbols from definition to expansion and vice-versa is much easier if this information is preserved in the print-name of the gensyms used, as done in defmacro/g! expansions21.
+
+Aside from the less verbose usage and more helpful expansion output compared to the traditional once-only, defmacro! also provides one extra key feature. In the traditional once-only, the binding for the gensym used to access the created lexical variable is given the same name as the argument to the macro expansion, which shadows the macro argument so it cannot be accessed by the macro definition. Because defmacro! splits this into two separate types of symbols, G-bang symbols and O-bang symbols, we can write macro expansions that use both of these values. To demonstrate this, here is yet another definition of the square macro:
+
+(defmacro! square (o!x)
+  `(progn
+     (format t "[~a gave ~a]~%"
+                 ',o!x   ,g!x)
+     (* ,g!x ,g!x)))
+Which can be used like so:
+
+(defvar x 4)
+
+X
+(square (incf x))
+[(INCF X) gave 5]
+25
+Notice that we quote the unquoted O-bang symbol in the above square definition. We do this because we don't want to evaluate this form again. The expansion generated by defmacro! already evaluated it. We simply want to take the form passed to square and use it for another purpose, in this case some kind of crude debugging statement. However, even though we evaluated it once already, and in this case it being incorrect, there is nothing stopping us from evaluating the provided form again, should our desired abstraction demand it.
+
+The defmacro! language allows us granular, convenient control over the evaluation of the arguments passed to our macros. If we prefix all the symbols representing arguments in the macro definition with O-bang, and only use the corresponding G-bang symbols in the macro definition, our expansions will be the same as lambda expressions?each form evaluated once, in left to right order. Without any of these symbols in args and without using any G-bang symbols in the expansion, defmacro! acts just like the regular COMMON LISP defmacro.
+
+Defmacro! is most useful during iterative development of a macro. Because it is a simple matter of adding two characters to a macro argument to get lambda style evaluation, and using gensyms is as easy as, well, writing them, we can change our mind about these decisions instantly. Defmacro! feels like an even tighter fitting glove over lambda than does COMMON LISP's defmacro. It is for this reason, iterative development, that we will use defmacro! as the main macro definition interface for the remainder of this book.
+
+NIF
+(defmacro! nif (o!expr pos zero neg)
+  `(cond ((plusp ,g!expr) ,pos)
+         ((zerop ,g!expr) ,zero)
+          (t ,neg)))
+Let's return to Graham's nif macro. When updating this macro for defmacro!, we notice that the expr argument, the one for which we created a gensym, is evaluated exactly once. Here we use defmacro! to indicate that this argument should be evaluated only once by calling it o!expr. This implementation of nif represents the final step in our evolution of this macro.
+
+Defmacro! blurs the gap between macro and function. It is this feature, the ability to provide some O-bang symbols in the macro argument and some regular symbols, that makes defmacro! especially useful. Just as backquote allows you to flip the default quoting behaviour, defmacro! allows you to flip the evaluation semantics of macro arguments from regular un-evaluated macro forms to singly evaluated, left-to-right lambda arguments.
+
+Duality of Syntax
+One of the most important concepts of lisp is called duality of syntax. Understanding how to use dualities and why they are important is an underlying theme of macro writing and of this book. Dualities are sometimes designed and sometimes accidentally discovered. To programmers of non-lisp languages the reality of dual syntax would be too unbelievable to describe at this point in the book so we will for now shy away from a direct definition. Instead, you, the reader, gets to discover it again and again as it is applied slowly and carefully so as to avoid shock. Should you experience headaches or other discomfort through the course of this book, I recommend that you immediately execute a garbage collection cycle (get some sleep), then return with a fresh and open mind.
+
+Referential transparency is sometimes defined as a property of code where any expression can be inserted anywhere and always have the same meaning. Introducing syntactic duals is the conscious violation of referential transparency and discovering them is reaping the fruits of a language that enables such violations. While other languages only let you build with semi-transparent panes of glass, lisp lets you use an assortment of smoke, mirrors, and prisms. The magic dust is made of macros, and most of its best tricks are based on syntactic duals.
+
+This section describes an important dual syntax we have already discussed but have not yet completely explored: COMMON LISP uses the same syntax for accessing both of its major types of variables, dynamic and lexical. This book tries to illustrate the real power of dynamic and lexical scope and why COMMON LISP's decision to use dual syntax is important.
+
+The purpose of dynamic scope is to provide a way for getting values in and out of lisp expressions based on when the expression is evaluated, not where it is defined or compiled. It just so happens that, thankfully, the syntax that COMMON LISP defines for this is identical to that used to access lexical variables, which are the exact opposite of dynamic variables in that they always refer to the locations they were compiled for, independent of when the access takes place. In fact, without external context in the form of a declaration, you can't tell which type of variable an expression is referring to. This dual syntax violates referential transparency, but rather than being something to avoid, lisp programmers welcome this because just as you can't differentiate an expression without context, neither can a macro. Hold that thought for a second. First, it must be made clear that creating bindings for dynamic variables does not create lexical closures. As an example, let's re-bind the variable temp-special that we earlier declared special:
+
+(let ((temp-special 'whatever))
+  (lambda () temp-special))
+
+#<Interpreted Function>
+Even though it is a let over lambda, this is not a lexical closure. This is a simple evaluation of a lambda macro form in some dynamic context which results in, of course, an anonymous function. This function, when applied, will access whatever current dynamic environment exists and fetch that value of temp-special. When the lambda macro was evaluated, a dynamic binding of temp-special to the symbol whatever existed, but who cares? Remember that lambda forms are constant objects, just simple machine code pointer returners, so evaluating this lambda form never even accesses the dynamic environment. What happens to our symbol whatever? After lisp is done evaluating the lambda form, it removes it from the dynamic environment and throws it away, unused.
+
+Some early lisps did support dynamic closures, which meant that every function defined in a non-null dynamic environment had its own (possibly partially shared) stack of dynamic bindings. The effect is similar to COMMON LISP's lexical scope and was implemented with something termed a spaghetti stack[SPAGHETTI-STACKS][INTERLISP-TOPS20]. This data structure is no longer a stack data structure, but actually a multiple path, garbage collected network. COMMON LISP does away with spaghetti stacks and only provides lexical closures[MACARONI].
+
+So lexical and dynamic variables are actually completely different, deservedly distinct concepts that just happen to share the same syntax in COMMON LISP code. Why on earth would we want this so-called duality of syntax? The answer is subtle, and only consciously appreciated by a minority of lisp programmers, but is so fundamental that it merits close study. This dual syntax allows us to a write a macro that has a single, common interface for creating expansions that are useful in both dynamic and lexical contexts. Even though the meanings of expansions of the macro can be completely different given their context, and even though each can mean entirely different things underneath, we can still use the same macro and the same combinations of this macro with other macros. In other words, macros can be made ambivalent about not only the contents of their macro arguments, but also about the different meanings of their expansions. We can use the macro just for its understood code transformation, ignoring the semantic meanings of the code, all because the code only has meaning once we use it somewhere?it has no meaning during macro processing. The more dualities of syntax there are, the more powerful an associated macro becomes. Many more examples of the advantages of dual syntax are detailed through this book. The duality between dynamic and lexical variables is a mild (but useful) example of this lispy philosophy. Some macros are created for the specific purpose of having powerful duals, and sometimes there are many more than two possible meanings for an expansion.
+
+A traditional convention in COMMON LISP code is to prefix and postfix the names of special variables with asterisk characters. For example, we might've chosen to name our temp-special variable *temp-special*. Since this convention is almost like having another namespace for dynamic variables, diminishing their duality with lexical variables, this book does not follow it exactly. The asterisks are merely convention and, fortunately, COMMON LISP does not enforce them. Not only can we leave the asterisks off special variable names, but we can add them to lexical variable names. Maybe it is a question of style. Which is a lesser fashion crime: lexical variables with asterisks or special variables without? I tend to think the less verbose of the two. Also, the names of lexical and special variables can be gensyms, a concept that transcends print names on symbols.
+
+So, as mentioned, this book hijacks the usual asterisk convention. Instead of
+
+Asterisked variable names indicate special variables.
+
+this book uses
+
+Asterisked variable names indicate special variables defined by the standard.
+
+My largest motivation for dropping these variable name earmuffs is simple and subjective: I think they are annoying to type and make code look ugly. I will not go so far as to suggest you do this for your own programs, just mention that I have been leaving off the earmuffs for years and am very content with COMMON LISP.
